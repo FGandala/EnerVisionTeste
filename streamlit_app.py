@@ -137,41 +137,78 @@ def cria_mapa(regiao):
 
     if regiao == 'Centro-sul':
         carga_estados['cores']=[None,None,None,200]
+        mapa = folium.Map(location=[-14.235,-54.2],zoom_start=4,
+                    max_zoom=4,min_zoom=4,tiles='CartoDB positron',dragging=False)
+
+        cloropleth = folium.Choropleth(
+        geo_data=coleta_localizacao(),
+        data=carga_estados,
+        columns=['Estados','cores'],
+        key_on='feature.properties.NOME2',
+        fill_color='Spectral'
+        )
+        cloropleth.geojson.add_to(mapa)
+        carga_estados.set_index('Estados',inplace=True)
+    
+    
+    
+        for features in cloropleth.geojson.data['features']:
+          features['properties']['MHW'] = "Carga diária" + " : " + str(carga_estados.loc[features['properties']['NOME2']]['Mhw'])
+          
+          
+    
+    
+        cloropleth.geojson.add_child(
+          folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
+        )
+        st.subheader("Região Atual")
+        st_mapa = st_folium(mapa, width=1000, height=450)
+      
+        if st_mapa['last_active_drawing']:
+          st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
+          return cria_mapa(st.session_state.estado_escolhido)
+
     if região == 'Nordeste':
         carga_estados['cores']=[200,None,None,None]
+        mapa = folium.Map(location=[-14.235,-54.2],zoom_start=4,
+                    max_zoom=4,min_zoom=4,tiles='CartoDB positron',dragging=False)
+
+        cloropleth = folium.Choropleth(
+        geo_data=coleta_localizacao(),
+        data=carga_estados,
+        columns=['Estados','cores'],
+        key_on='feature.properties.NOME2',
+        fill_color='Spectral'
+        )
+        cloropleth.geojson.add_to(mapa)
+        carga_estados.set_index('Estados',inplace=True)
+    
+    
+    
+        for features in cloropleth.geojson.data['features']:
+          features['properties']['MHW'] = "Carga diária" + " : " + str(carga_estados.loc[features['properties']['NOME2']]['Mhw'])
+          
+          
+    
+    
+        cloropleth.geojson.add_child(
+          folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
+        )
+        st.subheader("Região Atual")
+        st_mapa = st_folium(mapa, width=1000, height=450)
+      
+        if st_mapa['last_active_drawing']:
+        st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
+        return cria_mapa(st.session_state.estado_escolhido)
+
+
+
+      
+        
     if região == 'Norte':
         carga_estados['cores']=[None,200,None,None]
     if regiao == 'Sul':
         carga_estados['cores']=[None,None,200,None]
-    mapa = folium.Map(location=[-14.235,-54.2],zoom_start=4,
-                    max_zoom=4,min_zoom=4,tiles='CartoDB positron',dragging=False)
-
-    cloropleth = folium.Choropleth(
-    geo_data=coleta_localizacao(),
-    data=carga_estados,
-    columns=['Estados','cores'],
-    key_on='feature.properties.NOME2',
-    fill_color='Spectral'
-    )
-    cloropleth.geojson.add_to(mapa)
-    carga_estados.set_index('Estados',inplace=True)
-
-
-
-    for features in cloropleth.geojson.data['features']:
-      features['properties']['MHW'] = "Carga diária" + " : " + str(carga_estados.loc[features['properties']['NOME2']]['Mhw'])
-      
-      
-
-
-    cloropleth.geojson.add_child(
-      folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
-    )
-    st.subheader("Região Atual")
-    st_mapa = st_folium(mapa, width=1000, height=450)
-    if st_mapa['last_active_drawing']:
-      st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
-      return cria_mapa(st.session_state.estado_escolhido)
 
 
 
