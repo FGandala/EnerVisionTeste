@@ -31,7 +31,7 @@ for i in estados:
 carga_estados=pd.DataFrame(carga_estados)
 
 def coleta_localizacao():
-  localizacao = open(grandes_regioes_json.geojson)
+  localizacao = open('grandes_regioes_json.geojson')
   return localizacao
 
 def filtra_dados(região):
