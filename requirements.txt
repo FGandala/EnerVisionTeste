@@ -1,4 +1,5 @@
 folium==0.14.0
+geopandas==0.13.2
 pandas==2.0.2
 plotly==5.15.0
 plotly_express==0.4.1
