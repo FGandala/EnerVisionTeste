@@ -14,6 +14,7 @@ st.set_page_config(page_title='Forecasting',layout='wide')
 if 'estado_escolhido' not in st.session_state:
   st.session_state['estado_escolhido'] = 'Centro-sul'
 pagina = st.empty()
+@st.cache_data
 
 
 DATA=('https://ons-dl-prod-opendata.s3.amazonaws.com/dataset/carga_energia_di/CARGA_ENERGIA_2023.csv')
@@ -30,6 +31,9 @@ for i in estados:
 
 carga_estados=pd.DataFrame(carga_estados)
 
+def coleta_localizacao()
+  localizacao = open(grandes_regioes_json.geojson)
+  return localizacao
 
 def filtra_dados(região):
   dados = pd.DataFrame(data=carga[carga['nom_subsistema']==região]['val_cargaenergiamwmed'].values,
@@ -143,7 +147,7 @@ def cria_mapa(regiao):
                     max_zoom=4,min_zoom=4,tiles='CartoDB positron',dragging=False)
 
     cloropleth = folium.Choropleth(
-    geo_data='grandes_regioes_json.geojson',
+    geo_data=coleta_localizacao(),
     data=carga_estados,
     columns=['Estados','cores'],
     key_on='feature.properties.NOME2',
