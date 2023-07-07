@@ -116,7 +116,7 @@ def cria_grafico_linhas(dados_centro_sul):
         "series": seriesOverlaidChart
     }
 ], 'overlaid')
-
+@st.cache_resource
 def cria_mapa(regiao):
     região = st.session_state.estado_escolhido
     DATA=('https://ons-dl-prod-opendata.s3.amazonaws.com/dataset/carga_energia_di/CARGA_ENERGIA_2023.csv')
