@@ -131,16 +131,9 @@ def cria_mapa(regiao):
     carga_estados=pd.DataFrame(carga_estados)
 
 
-    match regiao:
-      case 'Centro-sul':
+    if regiao == 'Centro-sul':
         carga_estados['cores']=[None,None,None,200]
-      case 'Norte':
-        carga_estados['cores']=[None,200,None,None]
-      case 'Nordeste':
-        carga_estados['cores']=[200,None,None,None]
-      case 'Sul':
-        carga_estados['cores']=[None,None,200,None]
-
+    
     
     mapa = folium.Map(location=[-14.235,-54.2],zoom_start=4,
                     max_zoom=4,min_zoom=4,tiles='CartoDB positron',dragging=False)
