@@ -113,7 +113,7 @@ def cria_grafico_linhas(dados_centro_sul):
     }
 ], 'overlaid')
 
-def cria_mapa(região):
+def cria_mapa(regiao):
     região = st.session_state.estado_escolhido
     DATA=('https://ons-dl-prod-opendata.s3.amazonaws.com/dataset/carga_energia_di/CARGA_ENERGIA_2023.csv')
     carga=pd.read_csv(DATA,delimiter=';')
@@ -131,7 +131,7 @@ def cria_mapa(região):
     carga_estados=pd.DataFrame(carga_estados)
 
 
-    match região:
+    match regiao:
       case 'Centro-sul':
         carga_estados['cores']=[None,None,None,200]
       case 'Norte':
