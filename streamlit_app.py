@@ -137,7 +137,7 @@ def cria_mapa(regiao):
         carga_estados['cores']=[200,None,None,None]
     if região == 'Norte':
         carga_estados['cores']=[None,200,None,None]
-    if regiao == Sul
+    if regiao == 'Sul'
         carga_estados['cores']=[None,None,200,None]
     mapa = folium.Map(location=[-14.235,-54.2],zoom_start=4,
                     max_zoom=4,min_zoom=4,tiles='CartoDB positron',dragging=False)
