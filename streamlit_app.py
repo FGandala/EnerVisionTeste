@@ -8,7 +8,7 @@ import datetime
 from streamlit_lightweight_charts import renderLightweightCharts
 import streamlit_lightweight_charts.dataSamples as data
 import json
-
+import geopandas as gpd
 
 st.set_page_config(page_title='Forecasting',layout='wide')
 if 'estado_escolhido' not in st.session_state:
@@ -31,7 +31,7 @@ for i in estados:
 carga_estados=pd.DataFrame(carga_estados)
 
 def coleta_localizacao():
-  localizacao = json.loads('grandes_regioes_json')
+  localizacao = gpd.read_file('grandes_regioes_json.geojson')
   return localizacao
 
 def filtra_dados(região):
