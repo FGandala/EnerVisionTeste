@@ -198,8 +198,8 @@ def cria_mapa(regiao):
         st_mapa = st_folium(mapa, width=1000, height=450)
       
         if st_mapa['last_active_drawing']:
-        st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
-        return cria_mapa(st.session_state.estado_escolhido)
+          st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
+          return cria_mapa(st.session_state.estado_escolhido)
 
 
 
