@@ -147,9 +147,8 @@ def cria_mapa():
         )
         cloropleth.geojson.add_to(mapa)
         carga_estados.set_index('Estados',inplace=True)
-        if st_mapa['last_active_drawing']:
-          st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
-          st_folium
+        
+          
 
     if st.session_state.estado_escolhido == 'Nordeste':
         carga_estados['cores']=[200,None,None,None]
@@ -163,8 +162,6 @@ def cria_mapa():
         )
         cloropleth.geojson.add_to(mapa)
         carga_estados.set_index('Estados',inplace=True)
-        if st_mapa['last_active_drawing']:
-          st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
 
 
     for features in cloropleth.geojson.data['features']:
@@ -178,7 +175,8 @@ def cria_mapa():
     st_mapa = st_folium(mapa, width=1000, height=450,
                           feature_group_to_add = cloropleth
                          )
-
+    if st_mapa['last_active_drawing']:
+          st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
       
         
 
