@@ -33,7 +33,7 @@ carga_estados=pd.DataFrame(carga_estados)
 @st.cache_data
 def coleta_localizacao():
   localizacao = gpd.read_file('grandes_regioes_json.geojson')
-  return localizacao.coordinates
+  return localizacao
 
 def filtra_dados(região):
   dados = pd.DataFrame(data=carga[carga['nom_subsistema']==região]['val_cargaenergiamwmed'].values,
