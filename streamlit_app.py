@@ -138,9 +138,9 @@ def cria_mapa():
     if st.session_state.estado_escolhido == 'Centro-sul':
       carga_estados['cores']=[None,None,None,200]
       
-       style = {'fillColor': 'red', 'color': 'blueviolet'}
+      style = {'fillColor': 'red', 'color': 'blueviolet'}
 
-       cor_do_mapa = folium.GeoJson(data = geojson_url, name = "geojson",
+      cor_do_mapa = folium.GeoJson(data = geojson_url, name = "geojson",
                                           style_function = lambda x:style)
           
 
