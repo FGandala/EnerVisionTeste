@@ -192,7 +192,7 @@ def cria_mapa_nordeste():
     cloropleth.geojson.add_child(
           folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
         )
-   return mapa    
+    return mapa    
 
 
 
