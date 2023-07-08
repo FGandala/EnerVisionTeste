@@ -160,7 +160,7 @@ def cria_mapa():
           folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
         )
     st.subheader("Região Atual")
-    st_folium(mapa, width=1000, height=450,feature_group_to_add=cloropleth,
+    st_mapa=st_folium(mapa, width=1000, height=450,feature_group_to_add=cloropleth,
                          )
     if st_mapa['last_active_drawing']:
           st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
