@@ -234,11 +234,10 @@ def home():
     if st.session_state.estado_escolhido == 'Centro-sul':
       cria_mapa_centro_sul()
     if st.session_state.estado_escolhido == 'Nordeste':
-      cria_mapa_centro_sul()
+      cria_mapa_centro_nordeste()
     
     dados_centro_sul = filtra_dados(st.session_state.estado_escolhido)
     cria_grafico_linhas(dados_centro_sul)
-
 
 home()
   
