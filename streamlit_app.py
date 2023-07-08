@@ -161,9 +161,9 @@ def cria_mapa():
         features['properties']['MHW'] = "Carga diária" + " : " + str(carga_estados.loc[features['properties']['NOME2']]['Mhw'])
           
           
-    cor_do_mapa.geojson.add_child(
-          folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
-        )
+    #cor_do_mapa.geojson.add_child(
+          #folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
+        #)
     st.subheader("Região Atual")
     st_mapa = st_folium(mapa, width=1000, height=450,feature_group_to_add=cor_do_mapa,
                          )
