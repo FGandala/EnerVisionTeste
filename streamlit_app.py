@@ -175,7 +175,7 @@ def home():
                                               max_value=datetime.date(2023, 7, 3),
                                               )
     
-    cria_mapa()
+    cria_mapa_centro_sul()
     dados_centro_sul = filtra_dados(st.session_state.estado_escolhido)
     
   
