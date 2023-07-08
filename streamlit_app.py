@@ -150,7 +150,7 @@ def cria_mapa():
         key_on='feature.properties.NOME2',
         fill_color='Spectral'
         )
-        carga_estados.set_index('Estados',inplace=True)
+    carga_estados.set_index('Estados',inplace=True)
 
     for features in cor_do_mapa.geojson.data['features']:
         features['properties']['MHW'] = "Carga diária" + " : " + str(carga_estados.loc[features['properties']['NOME2']]['Mhw'])
