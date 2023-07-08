@@ -157,7 +157,7 @@ def cria_mapa():
         carga_estados.set_index('Estados',inplace=True)
 
 
-    for features in cloropleth.geojson.data['features']:
+    for features in cor_do_mapa.geojson.data['features']:
         features['properties']['MHW'] = "Carga diária" + " : " + str(carga_estados.loc[features['properties']['NOME2']]['Mhw'])
           
           
