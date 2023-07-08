@@ -157,9 +157,9 @@ def cria_mapa_centro_sul():
                          )
     if st_mapa['last_active_drawing']:
           st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
-          
+          return home()
 
-
+@st.cache_resource(experimental_allow_widgets=True)
 def cria_mapa_nordeste():
     DATA=('https://ons-dl-prod-opendata.s3.amazonaws.com/dataset/carga_energia_di/CARGA_ENERGIA_2023.csv')
     carga=pd.read_csv(DATA,delimiter=';')
@@ -200,7 +200,7 @@ def cria_mapa_nordeste():
                          )
     if st_mapa['last_active_drawing']:
           st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
-          return st_mapa       
+          return home()     
 
 
 
@@ -236,7 +236,7 @@ def home():
     if st.session_state.estado_escolhido == 'Nordeste':
       cria_mapa_centro_sul()
     
-  
+    dados_centro_sul = filtra_dados(st.session_state.estado_escolhido)
     cria_grafico_linhas(dados_centro_sul)
 
 
