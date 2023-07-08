@@ -216,8 +216,8 @@ def cria_mapa_nordeste():
 
 
 
-def home()
-    cria_mapa_centro_sul():
+def home():
+    cria_mapa_centro_sul()
     st.sidebar.image('LOGO.png')
   
     opção_tempo_inicial = st.sidebar.date_input('Escolha um valor inicial',datetime.date(2023, 5, 6),min_value=datetime.date(2023, 1, 1),
