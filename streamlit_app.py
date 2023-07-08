@@ -138,14 +138,10 @@ def cria_mapa():
     if st.session_state.estado_escolhido == 'Centro-sul':
         carga_estados['cores']=[None,None,None,200]
       
-        cloropleth = folium.Choropleth(
-        geo_data=coleta_localizacao(),
-        data=carga_estados,
-        columns=['Estados','cores'],
-        key_on='feature.properties.NOME2',
-        fill_color='Spectral'
-        )
-        carga_estados.set_index('Estados',inplace=True)
+       style = {'fillColor': 'red', 'color': 'blueviolet'}
+
+      folium.GeoJson(data =coleta_localizacao(), name = "geojson",
+      style_function = lambda x:style).add_to(m)
         
           
 
@@ -170,7 +166,7 @@ def cria_mapa():
           folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
         )
     st.subheader("Região Atual")
-    st_mapa = st_folium(mapa, width=1000, height=450,feature_group_to_add=cloropleth,
+    st_mapa = st_folium(mapa, width=1000, height=450
                          )
     if st_mapa['last_active_drawing']:
           st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
