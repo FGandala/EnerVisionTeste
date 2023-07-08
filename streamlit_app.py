@@ -156,7 +156,7 @@ def cria_mapa():
         features['properties']['MHW'] = "Carga diária" + " : " + str(carga_estados.loc[features['properties']['NOME2']]['Mhw'])
           
           
-    cor_do_mapa.geojson.add_child(
+    cloropleth.geojson.add_child(
           folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
         )
     st.subheader("Região Atual")
