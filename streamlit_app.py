@@ -133,7 +133,7 @@ def cria_mapa_centro_sul():
 
     carga_estados=pd.DataFrame(carga_estados)
     mapa = folium.Map(location=[-14.235,-54.2],zoom_start=4,
-                    max_zoom=4,min_zoom=4,tiles='CartoDB positron',dragging=False)
+                    max_zoom=4,min_zoom=4,tiles='CartoDB positron',dragging=False,prefer_canvas=True)
   
     carga_estados['cores']=[None,None,None,200]
           
@@ -173,7 +173,7 @@ def cria_mapa_nordeste():
 
     carga_estados=pd.DataFrame(carga_estados)
     mapa = folium.Map(location=[-14.235,-54.2],zoom_start=4,
-                    max_zoom=4,min_zoom=4,tiles='CartoDB positron',dragging=False)
+                    max_zoom=4,min_zoom=4,tiles='CartoDB positron',dragging=False,prefer_canvas=True)
   
     carga_estados['cores']=[200,None,None,None]
           
