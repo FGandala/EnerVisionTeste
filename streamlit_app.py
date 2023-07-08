@@ -137,17 +137,13 @@ def cria_mapa():
 
     if st.session_state.estado_escolhido == 'Centro-sul':
       carga_estados['cores']=[None,None,None,200]
-      
-      style = {'fillColor': 'red', 'color': 'blueviolet'}
-
-      cor_do_mapa = folium.GeoJson(data = coleta_localizacao(), name = "geojson",
-                                          style_function = lambda x:style)
           
 
     if st.session_state.estado_escolhido == 'Nordeste':
         carga_estados['cores']=[200,None,None,None]
 
-        cloropleth = folium.Choropleth(
+        
+    cloropleth = folium.Choropleth(
         geo_data=coleta_localizacao(),
         data=carga_estados,
         columns=['Estados','cores'],
@@ -156,16 +152,15 @@ def cria_mapa():
         )
         carga_estados.set_index('Estados',inplace=True)
 
-
-    #for features in cor_do_mapa.geojson.data['features']:
-        #features['properties']['MHW'] = "Carga diária" + " : " + str(carga_estados.loc[features['properties']['NOME2']]['Mhw'])
+    for features in cor_do_mapa.geojson.data['features']:
+        features['properties']['MHW'] = "Carga diária" + " : " + str(carga_estados.loc[features['properties']['NOME2']]['Mhw'])
           
           
-    #cor_do_mapa.geojson.add_child(
-          #folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
-        #)
+    cor_do_mapa.geojson.add_child(
+          folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
+        )
     st.subheader("Região Atual")
-    st_mapa = st_folium(mapa, width=1000, height=450,feature_group_to_add=cor_do_mapa,
+    st_folium(mapa, width=1000, height=450,feature_group_to_add=cor_do_mapa,
                          )
     if st_mapa['last_active_drawing']:
           st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
