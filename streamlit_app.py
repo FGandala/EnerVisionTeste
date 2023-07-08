@@ -145,7 +145,6 @@ def cria_mapa():
         key_on='feature.properties.NOME2',
         fill_color='Spectral'
         )
-        cloropleth.geojson.add_to(mapa)
         carga_estados.set_index('Estados',inplace=True)
         
           
@@ -160,7 +159,6 @@ def cria_mapa():
         key_on='feature.properties.NOME2',
         fill_color='Spectral'
         )
-        cloropleth.geojson.add_to(mapa)
         carga_estados.set_index('Estados',inplace=True)
 
 
@@ -172,7 +170,7 @@ def cria_mapa():
           folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
         )
     st.subheader("Região Atual")
-    st_mapa = st_folium(mapa, width=1000, height=450
+    st_mapa = st_folium(mapa, width=1000, height=450,feature_group_to_add=cloropleth
                          )
     if st_mapa['last_active_drawing']:
           st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
