@@ -231,7 +231,7 @@ def home():
     opção_tempo_final = st.sidebar.date_input('Escolha um valor final',datetime.date(2023, 5, 6),min_value=datetime.date(2023, 1, 1),
                                               max_value=datetime.date(2023, 7, 3),
                                               )
-    if st.session_state.estado_escolhido == 'tentro-sul':
+    if st.session_state.estado_escolhido == 'Centro-sul':
       cria_mapa_centro_sul()
     if st.session_state.estado_escolhido == 'Nordeste':
       cria_mapa_centro_nordeste()
