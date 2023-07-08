@@ -230,14 +230,14 @@ def home():
                          )
       if st_mapa['last_active_drawing']:
           st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
-          st.write('OI')
+          st.experimental_rerun()
     if st.session_state.estado_escolhido == 'Nordeste':
       st.subheader("Região Atual")
       st_mapa=st_folium(cria_mapa_nordeste(), width=1000, height=450,key='Nordeste'
                          )
       if st_mapa['last_active_drawing']:
           st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
-         
+          st.experimental_rerun()
     
     dados_centro_sul = filtra_dados(st.session_state.estado_escolhido)
     cria_grafico_linhas(dados_centro_sul)
