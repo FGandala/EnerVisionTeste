@@ -116,9 +116,8 @@ def cria_grafico_linhas(dados_centro_sul):
         "series": seriesOverlaidChart
     }
 ], 'overlaid')
-
-def cria_mapa(regiao):
-    região = st.session_state.estado_escolhido
+@st.cache_resource
+def cria_mapa():
     DATA=('https://ons-dl-prod-opendata.s3.amazonaws.com/dataset/carga_energia_di/CARGA_ENERGIA_2023.csv')
     carga=pd.read_csv(DATA,delimiter=';')
     carga.nom_subsistema = carga.nom_subsistema.apply(lambda x:'Centro-sul'if(x=='Sudeste/Centro-Oeste')
@@ -136,7 +135,7 @@ def cria_mapa(regiao):
     mapa = folium.Map(location=[-14.235,-54.2],zoom_start=4,
                     max_zoom=4,min_zoom=4,tiles='CartoDB positron',dragging=False)
 
-    if regiao == 'Centro-sul':
+    if st.session_state.estado_escolhido == 'Centro-sul':
         carga_estados['cores']=[None,None,None,200]
       
         cloropleth = folium.Choropleth(
@@ -167,7 +166,7 @@ def cria_mapa(regiao):
           st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
           return cria_mapa(st.session_state.estado_escolhido)
 
-    if região == 'Nordeste':
+    if st.session_state.estado_escolhido == 'Nordeste':
         carga_estados['cores']=[200,None,None,None]
 
         cloropleth = folium.Choropleth(
