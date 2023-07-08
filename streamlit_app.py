@@ -140,7 +140,7 @@ def cria_mapa():
       
       style = {'fillColor': 'red', 'color': 'blueviolet'}
 
-      cor_do_mapa = folium.GeoJson(data = geojson_url, name = "geojson",
+      cor_do_mapa = folium.GeoJson(data = coleta_localizacao(), name = "geojson",
                                           style_function = lambda x:style)
           
 
