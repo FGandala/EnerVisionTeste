@@ -116,7 +116,7 @@ def cria_grafico_linhas(dados_centro_sul):
         "series": seriesOverlaidChart
     }
 ], 'overlaid')
-@st.cache_resource
+@st.cache_resource(experimental_allow_widgets=True)
 def cria_mapa():
     DATA=('https://ons-dl-prod-opendata.s3.amazonaws.com/dataset/carga_energia_di/CARGA_ENERGIA_2023.csv')
     carga=pd.read_csv(DATA,delimiter=';')
@@ -199,10 +199,6 @@ def cria_mapa():
 
       
         
-    if região == 'Norte':
-        carga_estados['cores']=[None,200,None,None]
-    if regiao == 'Sul':
-        carga_estados['cores']=[None,None,200,None]
 
 
 
