@@ -192,12 +192,7 @@ def cria_mapa_nordeste():
     cloropleth.geojson.add_child(
           folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
         )
-    st.subheader("Região Atual")
-    st_mapa=st_folium(mapa, width=1000, height=450,key='Nordeste'
-                         )
-    if st_mapa['last_active_drawing']:
-          st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
-          return home()     
+   return mapa    
 
 
 
@@ -218,6 +213,7 @@ def cria_mapa_nordeste():
 
 def home():
     cria_mapa_centro_sul()
+    cria_mapa_nordeste()
     st.sidebar.image('LOGO.png')
   
     opção_tempo_inicial = st.sidebar.date_input('Escolha um valor inicial',datetime.date(2023, 5, 6),min_value=datetime.date(2023, 1, 1),
@@ -236,7 +232,12 @@ def home():
           st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
           st.write('OI')
     if st.session_state.estado_escolhido == 'Nordeste':
-      cria_mapa_centro_nordeste()
+      st.subheader("Região Atual")
+      st_mapa=st_folium(cria_mapa_nordeste(), width=1000, height=450,key='Nordeste'
+                         )
+      if st_mapa['last_active_drawing']:
+          st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
+         
     
     dados_centro_sul = filtra_dados(st.session_state.estado_escolhido)
     cria_grafico_linhas(dados_centro_sul)
