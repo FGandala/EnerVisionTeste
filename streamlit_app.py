@@ -177,7 +177,7 @@ def cria_mapa():
                          )
     if st_mapa['last_active_drawing']:
           st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
-      
+          cria_mapa()
         
 
 
