@@ -147,21 +147,6 @@ def cria_mapa():
         )
         cloropleth.geojson.add_to(mapa)
         carga_estados.set_index('Estados',inplace=True)
-    
-    
-    
-        for features in cloropleth.geojson.data['features']:
-          features['properties']['MHW'] = "Carga diária" + " : " + str(carga_estados.loc[features['properties']['NOME2']]['Mhw'])
-          
-          
-    
-    
-        cloropleth.geojson.add_child(
-          folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
-        )
-        st.subheader("Região Atual")
-        st_mapa = st_folium(mapa, width=1000, height=450)
-      
         if st_mapa['last_active_drawing']:
           st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
           st_folium
