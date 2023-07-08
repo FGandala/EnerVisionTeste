@@ -116,7 +116,7 @@ def cria_grafico_linhas(dados_centro_sul):
         "series": seriesOverlaidChart
     }
 ], 'overlaid')
-@st.cache_resource(experimental_allow_widgets=True)
+
 def cria_mapa():
     DATA=('https://ons-dl-prod-opendata.s3.amazonaws.com/dataset/carga_energia_di/CARGA_ENERGIA_2023.csv')
     carga=pd.read_csv(DATA,delimiter=';')
@@ -164,7 +164,7 @@ def cria_mapa():
       
         if st_mapa['last_active_drawing']:
           st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
-          return cria_mapa(st.session_state.estado_escolhido)
+          st_folium
 
     if st.session_state.estado_escolhido == 'Nordeste':
         carga_estados['cores']=[200,None,None,None]
@@ -179,23 +179,24 @@ def cria_mapa():
         cloropleth.geojson.add_to(mapa)
         carga_estados.set_index('Estados',inplace=True)
     
-        for features in cloropleth.geojson.data['features']:
-          features['properties']['MHW'] = "Carga diária" + " : " + str(carga_estados.loc[features['properties']['NOME2']]['Mhw'])
-          
-          
-    
-    
-        cloropleth.geojson.add_child(
-          folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
-        )
-        st.subheader("Região Atual")
-        st_mapa = st_folium(mapa, width=1000, height=450)
+       
+        
       
         if st_mapa['last_active_drawing']:
           st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
-          return cria_mapa(st.session_state.estado_escolhido)
 
 
+       for features in cloropleth.geojson.data['features']:
+          features['properties']['MHW'] = "Carga diária" + " : " + str(carga_estados.loc[features['properties']['NOME2']]['Mhw'])
+          
+          
+      cloropleth.geojson.add_child(
+          folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
+        )
+      st.subheader("Região Atual")
+      st_mapa = st_folium(mapa, width=1000, height=450,
+                          feature_group_to_add = cloropleth
+                         )
 
       
         
