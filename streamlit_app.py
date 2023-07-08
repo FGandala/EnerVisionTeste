@@ -186,8 +186,8 @@ def cria_mapa():
           st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
 
 
-      for features in cloropleth.geojson.data['features']:
-          features['properties']['MHW'] = "Carga diária" + " : " + str(carga_estados.loc[features['properties']['NOME2']]['Mhw'])
+     for features in cloropleth.geojson.data['features']:
+        features['properties']['MHW'] = "Carga diária" + " : " + str(carga_estados.loc[features['properties']['NOME2']]['Mhw'])
           
           
       cloropleth.geojson.add_child(
