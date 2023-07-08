@@ -216,7 +216,7 @@ def cria_mapa_nordeste():
 
 
 
-def home():
+def home()
     cria_mapa_centro_sul():
     st.sidebar.image('LOGO.png')
   
