@@ -157,6 +157,7 @@ def cria_mapa_centro_sul():
                          )
     if st_mapa['last_active_drawing']:
           st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
+          st.write(st.session_state.estado_escolhido)
           return home()
 
 @st.cache_resource(experimental_allow_widgets=True)
