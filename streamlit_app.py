@@ -133,13 +133,12 @@ def cria_mapa(regiao):
       carga_estados['Mhw'].append((carga.loc[carga.nom_subsistema==i]['val_cargaenergiamwmed'].sum()))
 
     carga_estados=pd.DataFrame(carga_estados)
-
+    mapa = folium.Map(location=[-14.235,-54.2],zoom_start=4,
+                    max_zoom=4,min_zoom=4,tiles='CartoDB positron',dragging=False)
 
     if regiao == 'Centro-sul':
         carga_estados['cores']=[None,None,None,200]
-        mapa = folium.Map(location=[-14.235,-54.2],zoom_start=4,
-                    max_zoom=4,min_zoom=4,tiles='CartoDB positron',dragging=False)
-
+      
         cloropleth = folium.Choropleth(
         geo_data=coleta_localizacao(),
         data=carga_estados,
