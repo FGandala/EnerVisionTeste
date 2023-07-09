@@ -111,7 +111,7 @@ def cria_mapa(cores):
     estados=['Nordeste','Norte','Sul','Centro-sul']
     for i in estados:
       carga_estados['Estados'].append(i)
-      carga_estados['Mhw'].append(dados.i.iloc[-24::].sum().round())
+      carga_estados['Mhw'].append(dados[i].iloc[-24::].sum().round())
 
     carga_estados=pd.DataFrame(carga_estados)
     mapa = folium.Map(location=[-14.235,-54.2],zoom_start=4,
