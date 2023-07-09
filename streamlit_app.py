@@ -136,7 +136,7 @@ def cria_mapa(_cores):
     mapa = folium.Map(location=[-14.235,-54.2],zoom_start=4,
                     max_zoom=4,min_zoom=4,tiles='CartoDB positron',dragging=False,prefer_canvas=True)
   
-    carga_estados['cores']=cores
+    carga_estados['cores']=_cores
           
     cloropleth = folium.Choropleth(
         geo_data=coleta_localizacao(),
@@ -163,8 +163,8 @@ def home():
 
     opção_regiao = st.sidebar.selectbox('Escolha um região',('Norte','Nordeste','Centro-sul','Sul')) 
     if opção_regiao == 'Centro-sul':
-      cores =[None,None,None,'200']
-      cria_mapa(cores)
+      [None,None,None,'200']
+      cria_mapa([None,None,None,'200'])
 
 
   
