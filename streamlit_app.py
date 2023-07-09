@@ -175,6 +175,5 @@ def home():
     
     #dados_centro_sul = filtra_dados(st.session_state.estado_escolhido)
     #cria_grafico_linhas(dados_centro_sul)
-
 home()
   
