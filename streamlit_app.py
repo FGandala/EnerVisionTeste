@@ -157,9 +157,11 @@ def cria_mapa():
     
           
 def home():
-    opção_regiao = st.sidebar.selectbox('Escolha um região',('Norte','Nordeste','Centro-Sul','Sul'))
+    
   
     st.sidebar.image('LOGO.png')
+
+    opção_regiao = st.sidebar.selectbox('Escolha um região',('Norte','Nordeste','Centro-Sul','Sul'))
   
     opção_tempo_inicial = st.sidebar.date_input('Escolha um valor inicial',datetime.date(2023, 5, 6),min_value=datetime.date(2023, 1, 1),
                                               max_value=datetime.date(2023, 7, 3),
