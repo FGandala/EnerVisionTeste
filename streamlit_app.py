@@ -193,7 +193,7 @@ def cria_mapa_nordeste():
           folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
         )
     st_mapa = st_folium(mapa, width=1000, height=450,key='Nordeste')
-    hash(st_mapa['last_active_drawing'])
+    hash(st_mapa)
     if st_mapa['last_active_drawing']:
       st.write('kkk')
       return st_mapa['last_active_drawing']['properties']['NOME2']
