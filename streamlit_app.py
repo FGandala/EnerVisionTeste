@@ -155,7 +155,7 @@ def cria_mapa(cores):
         )
     st.subheader("Região Selecionada")
     st_mapa = st_folium(mapa, width=1000, height=450,key='Centro-sul') 
-    return st_mapa
+    
           
 def home():
     
@@ -164,10 +164,7 @@ def home():
 
     opção_regiao = st.sidebar.selectbox('Escolha uma região',('Norte','Nordeste','Centro-sul','Sul')) 
     if opção_regiao == 'Centro-sul':
-      teste=cria_mapa([None,None,None,200])
-      if teste['last_active_drawing']:
-        st.write('ola')
-      
+      cria_mapa([None,None,None,200])
     if opção_regiao == 'Nordeste':
       cria_mapa([200,None,None,None])
     if opção_regiao == 'Norte':
