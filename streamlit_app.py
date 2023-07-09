@@ -12,8 +12,7 @@ st.set_page_config(page_title='Forecasting',layout='wide')
 
 pagina = st.empty()
 
-DATA=('https://ons-dl-prod-opendata.s3.amazonaws.com/dataset/carga_energia_di/CARGA_ENERGIA_2023.csv')
-carga=pd.read_csv(DATA,delimiter=';')
+DATA=pd.read_csv('DataFrameNovo (1)')
 carga.nom_subsistema = carga.nom_subsistema.apply(lambda x:'Centro-sul'if(x=='Sudeste/Centro-Oeste')
                                                   else x)
 
