@@ -164,8 +164,8 @@ def home():
     opção_regiao = st.sidebar.selectbox('Escolha um região',('Norte','Nordeste','Centro-sul','Sul')) 
     if opção_regiao == 'Centro-sul':
       cria_mapa([None,None,None,200])
-
-
+    if opção_regiao == 'Nordeste':
+      cria_mapa([200,None,None,None])
   
   
     opção_tempo_inicial = st.sidebar.date_input('Escolha um valor inicial',datetime.date(2023, 5, 6),min_value=datetime.date(2023, 1, 1),
