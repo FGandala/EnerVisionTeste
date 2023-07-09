@@ -129,7 +129,7 @@ def cria_mapa(cores):
     carga_estados.set_index('Estados',inplace=True)
     cloropleth.geojson.add_to(mapa)
     for features in cloropleth.geojson.data['features']:
-        features['properties']['MHW'] = "Consumo nas últimas 24 horas: "+ str(carga_estados.loc[features['properties']['NOME2']]['Mhw'])+'Mhw'
+        features['properties']['MHW'] = "Consumo nas últimas 24 horas: "+ str(carga_estados.loc[features['properties']['NOME2']]['Mhw'])+' Mhw'
           
     cloropleth.geojson.add_child(
           folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
