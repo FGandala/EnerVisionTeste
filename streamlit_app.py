@@ -163,7 +163,6 @@ def home():
 
     opção_regiao = st.sidebar.selectbox('Escolha um região',('Norte','Nordeste','Centro-sul','Sul')) 
     if opção_regiao == 'Centro-sul':
-      [None,None,None,'200']
       cria_mapa([None,None,None,'200'])
 
 
