@@ -194,7 +194,7 @@ def cria_mapa_nordeste():
         )
     st_mapa = st_folium(mapa, width=1000, height=450,key='Nordeste')
     if st_mapa['last_active_drawing']:
-      st.write('oi')
+      st.write('ola')
       return st_mapa['last_active_drawing']['properties']['NOME2']
 
 
