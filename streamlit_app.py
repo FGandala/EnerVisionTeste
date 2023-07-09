@@ -154,7 +154,7 @@ def cria_mapa(cores):
           folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
         )
     st_mapa = st_folium(mapa, width=1000, height=450,key='Centro-sul') 
-    
+    st.wtrite(st_mapa['last_active_drawing'])
           
 def home():
     
