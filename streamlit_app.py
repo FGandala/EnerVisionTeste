@@ -162,7 +162,7 @@ def home():
     st.sidebar.image('LOGO.png')
 
     opção_regiao = st.sidebar.selectbox('Escolha um região',('Norte','Nordeste','Centro-Sul','Sul')) 
-    if opção_região == 'Centro-sul':
+    if opção_regiao == 'Centro-sul':
       cores =[None,None,None,'200']
       cria_mapa(cores)
 
