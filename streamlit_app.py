@@ -227,6 +227,7 @@ def home():
       st.subheader("Região Atual")
       st_mapa=cria_mapa_centro_sul()
       if st_mapa['last_active_drawing']:
+          st.write('ola')
           st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
           st.experimental_rerun()
     if st.session_state.estado_escolhido == 'Nordeste':
