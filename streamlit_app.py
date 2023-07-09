@@ -21,14 +21,14 @@ def coleta_dados_csv():
 def coleta_localizacao():
   localizacao = gpd.read_file('grandes_regioes_json.geojson')
   return localizacao
-
+@st.cache_data
 def filtra_dados(região,data_frame):
   dados = data_frame[região]
   return dados
 
 
 
-def cria_grafico_linhas(dados_centro_sul):
+def cria_grafico_linhas(dados_região,tempo_inicial,tempo_final):
 
   overlaidAreaSeriesOptions = {
     "height": 400,
@@ -65,7 +65,7 @@ def cria_grafico_linhas(dados_centro_sul):
   seriesOverlaidChart = [
     {
         "type": 'Area',
-        "data": data.seriesMultipleChartArea01,
+        "data": dados_região,
         "options": {
             "topColor": 'rgba(255, 192, 0, 0.7)',
             "bottomColor": 'rgba(255, 192, 0, 0.3)',
@@ -166,8 +166,8 @@ def home():
 
     
     
-    dados_centro_sul = filtra_dados(opção_regiao,coleta_dados_csv())
-    cria_grafico_linhas(dados_centro_sul)
+    dados_região = filtra_dados(opção_regiao,coleta_dados_csv())
+    cria_grafico_linhas(dados_região,opção_tempo_inicial,opção_tempo_final)
 
 home()
   
