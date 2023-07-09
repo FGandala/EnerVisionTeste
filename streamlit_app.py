@@ -65,7 +65,7 @@ def cria_grafico_linhas(dados_região,tempo_inicial,tempo_final):
   seriesOverlaidChart = [
     {
         "type": 'Area',
-        "data": dados_região.to_json(orient="index")
+        "data": dados_região.to_json(orient="index"),
         "options": {
             "topColor": 'rgba(255, 192, 0, 0.7)',
             "bottomColor": 'rgba(255, 192, 0, 0.3)',
