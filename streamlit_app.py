@@ -156,7 +156,7 @@ def cria_mapa_centro_sul():
     
           
 
-@st.cache_data(experimental_allow_widgets=True)
+#@st.cache_data(experimental_allow_widgets=True)
 def cria_mapa_nordeste():
     DATA=('https://ons-dl-prod-opendata.s3.amazonaws.com/dataset/carga_energia_di/CARGA_ENERGIA_2023.csv')
     carga=pd.read_csv(DATA,delimiter=';')
