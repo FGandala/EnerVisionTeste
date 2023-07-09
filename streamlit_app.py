@@ -11,30 +11,19 @@ import geopandas as gpd
 st.set_page_config(page_title='Forecasting',layout='wide')
 
 pagina = st.empty()
+@st.cache_data
+def coleta_dados_csv():
+  dados=pd.read_csv('DadosFiltrados.csv')
+  return dados
 
-DATA=('https://ons-dl-prod-opendata.s3.amazonaws.com/dataset/carga_energia_di/CARGA_ENERGIA_2023.csv')
-carga=pd.read_csv(DATA,delimiter=';')
-carga.nom_subsistema = carga.nom_subsistema.apply(lambda x:'Centro-sul'if(x=='Sudeste/Centro-Oeste')
-                                                  else x)
-
-estados=['Nordeste','Norte','Sul','Centro-sul']
-carga_estados={'Estados':[],
-               'Mhw':[]}
-for i in estados:
-    carga_estados['Estados'].append(i)
-    carga_estados['Mhw'].append((carga.loc[carga.nom_subsistema==i]['val_cargaenergiamwmed'].sum()))
-
-carga_estados=pd.DataFrame(carga_estados)
 
 @st.cache_data
 def coleta_localizacao():
   localizacao = gpd.read_file('grandes_regioes_json.geojson')
   return localizacao
 
-def filtra_dados(região):
-  dados = pd.DataFrame(data=carga[carga['nom_subsistema']==região]['val_cargaenergiamwmed'].values,
-                        index=carga[carga['nom_subsistema']==região]['din_instante'].values,
-                        columns=['Carga'])
+def filtra_dados(região,data_frame):
+  dados = data_frame[região]
   return dados
 
 
@@ -115,18 +104,14 @@ def cria_grafico_linhas(dados_centro_sul):
 
 @st.cache_data(experimental_allow_widgets=True)
 def cria_mapa(cores):
-    DATA=('https://ons-dl-prod-opendata.s3.amazonaws.com/dataset/carga_energia_di/CARGA_ENERGIA_2023.csv')
-    carga=pd.read_csv(DATA,delimiter=';')
-    carga.nom_subsistema = carga.nom_subsistema.apply(lambda x:'Centro-sul'if(x=='Sudeste/Centro-Oeste')
-                                                  else x)
 
-
+    dados=coleta_dados_csv()
     carga_estados={'Estados':[],
                'Mhw':[]}
     estados=['Nordeste','Norte','Sul','Centro-sul']
     for i in estados:
       carga_estados['Estados'].append(i)
-      carga_estados['Mhw'].append((carga.loc[carga.nom_subsistema==i]['val_cargaenergiamwmed'].sum()))
+      carga_estados['Mhw'].append(dados.i.iloc[-24::].sum().round())
 
     carga_estados=pd.DataFrame(carga_estados)
     mapa = folium.Map(location=[-14.235,-54.2],zoom_start=4,
@@ -144,7 +129,7 @@ def cria_mapa(cores):
     carga_estados.set_index('Estados',inplace=True)
     cloropleth.geojson.add_to(mapa)
     for features in cloropleth.geojson.data['features']:
-        features['properties']['MHW'] = "Carga diária" + " : " + str(carga_estados.loc[features['properties']['NOME2']]['Mhw'])
+        features['properties']['MHW'] = "Carga das ultimas 24 horas:" + " : " + str(carga_estados.loc[features['properties']['NOME2']]['Mhw'])
           
     cloropleth.geojson.add_child(
           folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
