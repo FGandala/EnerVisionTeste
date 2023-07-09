@@ -152,7 +152,7 @@ def cria_mapa_centro_sul():
     cloropleth.geojson.add_child(
           folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
         )
-    return st_folium(cria_mapa_centro_sul(), width=1000, height=450,key='Centro-sul') 
+    return st_folium(mapa, width=1000, height=450,key='Centro-sul') 
     
           
 
@@ -192,7 +192,7 @@ def cria_mapa_nordeste():
     cloropleth.geojson.add_child(
           folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
         )
-    return st_folium(cria_mapa_nordeste(), width=1000, height=450,key='Nordeste')
+    return st_folium(mapa, width=1000, height=450,key='Nordeste')
 
 
 
