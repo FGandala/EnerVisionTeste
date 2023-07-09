@@ -117,8 +117,8 @@ def cria_grafico_linhas(dados_centro_sul):
     }
 ], 'overlaid')
 
-
-def cria_mapa():
+@st.cache_data(experimental_allow_widgets=True)
+def cria_mapa(cores):
     DATA=('https://ons-dl-prod-opendata.s3.amazonaws.com/dataset/carga_energia_di/CARGA_ENERGIA_2023.csv')
     carga=pd.read_csv(DATA,delimiter=';')
     carga.nom_subsistema = carga.nom_subsistema.apply(lambda x:'Centro-sul'if(x=='Sudeste/Centro-Oeste')
@@ -136,7 +136,7 @@ def cria_mapa():
     mapa = folium.Map(location=[-14.235,-54.2],zoom_start=4,
                     max_zoom=4,min_zoom=4,tiles='CartoDB positron',dragging=False,prefer_canvas=True)
   
-    carga_estados['cores']=[None,None,None,200]
+    carga_estados['cores']=cores
           
     cloropleth = folium.Choropleth(
         geo_data=coleta_localizacao(),
@@ -161,7 +161,13 @@ def home():
   
     st.sidebar.image('LOGO.png')
 
-    opção_regiao = st.sidebar.selectbox('Escolha um região',('Norte','Nordeste','Centro-Sul','Sul'))
+    opção_regiao = st.sidebar.selectbox('Escolha um região',('Norte','Nordeste','Centro-Sul','Sul')) 
+    if opção_região == 'Centro-sul':
+      cores =[None,None,None,'200']
+      cria_mapa(cores)
+
+
+  
   
     opção_tempo_inicial = st.sidebar.date_input('Escolha um valor inicial',datetime.date(2023, 5, 6),min_value=datetime.date(2023, 1, 1),
                                               max_value=datetime.date(2023, 7, 3),
