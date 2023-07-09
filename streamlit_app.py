@@ -116,7 +116,7 @@ def cria_grafico_linhas(dados_centro_sul):
         "series": seriesOverlaidChart
     }
 ], 'overlaid')
-@st.cache_resource
+@st.cache_data(experimental_allow_widgets=True)
 def cria_mapa_centro_sul():
     DATA=('https://ons-dl-prod-opendata.s3.amazonaws.com/dataset/carga_energia_di/CARGA_ENERGIA_2023.csv')
     carga=pd.read_csv(DATA,delimiter=';')
@@ -152,11 +152,11 @@ def cria_mapa_centro_sul():
     cloropleth.geojson.add_child(
           folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
         )
-    return mapa 
+    return st_folium(cria_mapa_centro_sul(), width=1000, height=450,key='Centro-sul') 
     
           
 
-@st.cache_resource
+@st.cache_data(experimental_allow_widgets=True)
 def cria_mapa_nordeste():
     DATA=('https://ons-dl-prod-opendata.s3.amazonaws.com/dataset/carga_energia_di/CARGA_ENERGIA_2023.csv')
     carga=pd.read_csv(DATA,delimiter=';')
@@ -192,7 +192,7 @@ def cria_mapa_nordeste():
     cloropleth.geojson.add_child(
           folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
         )
-    return mapa    
+    return st_folium(cria_mapa_nordeste(), width=1000, height=450,key='Nordeste')
 
 
 
@@ -226,15 +226,13 @@ def home():
                                               )
     if st.session_state.estado_escolhido == 'Centro-sul':
       st.subheader("Região Atual")
-      st_mapa=st_folium(cria_mapa_centro_sul(), width=1000, height=450,key='Centro-sul'
-                         )
+      st_mapa=cria_mapa_centro_sul()
       if st_mapa['last_active_drawing']:
           st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
           st.experimental_rerun()
     if st.session_state.estado_escolhido == 'Nordeste':
       st.subheader("Região Atual")
-      st_mapa=st_folium(cria_mapa_nordeste(), width=1000, height=450,key='Nordeste'
-                         )
+      st_mapa=cria_mapa_nordeste()
       if st_mapa['last_active_drawing']:
           st.session_state.estado_escolhido=st_mapa['last_active_drawing']['properties']['NOME2']
           st.experimental_rerun()
