@@ -181,7 +181,7 @@ def home():
 
     
     
-    dados_centro_sul = filtra_dados(st.session_state.estado_escolhido)
+    dados_centro_sul = filtra_dados(opção_regiao)
     cria_grafico_linhas(dados_centro_sul)
 
 home()
