@@ -118,7 +118,7 @@ def cria_grafico_linhas(dados_centro_sul):
 ], 'overlaid')
 
 
-def cria_mapa_centro_sul():
+def cria_mapa():
     DATA=('https://ons-dl-prod-opendata.s3.amazonaws.com/dataset/carga_energia_di/CARGA_ENERGIA_2023.csv')
     carga=pd.read_csv(DATA,delimiter=';')
     carga.nom_subsistema = carga.nom_subsistema.apply(lambda x:'Centro-sul'if(x=='Sudeste/Centro-Oeste')
@@ -173,7 +173,7 @@ def home():
     opção_regiao = st.sidebar('Escolha um região',('Norte','Nordeste','Centro-Sul','Sul')
     
     
-    #dados_centro_sul = filtra_dados(st.session_state.estado_escolhido)
-    #cria_grafico_linhas(dados_centro_sul)
+    dados_centro_sul = filtra_dados(st.session_state.estado_escolhido)
+    cria_grafico_linhas(dados_centro_sul)
 home()
   
