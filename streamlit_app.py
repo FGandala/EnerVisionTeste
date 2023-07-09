@@ -9,10 +9,8 @@ import json
 import geopandas as gpd
 
 st.set_page_config(page_title='Forecasting',layout='wide')
-if 'estado_escolhido' not in st.session_state:
-  st.session_state['estado_escolhido'] = 'Centro-sul'
-pagina = st.empty()
 
+pagina = st.empty()
 
 DATA=('https://ons-dl-prod-opendata.s3.amazonaws.com/dataset/carga_energia_di/CARGA_ENERGIA_2023.csv')
 carga=pd.read_csv(DATA,delimiter=';')
