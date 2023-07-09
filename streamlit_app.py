@@ -166,9 +166,9 @@ def home():
       cria_mapa([None,None,None,200])
     if opção_regiao == 'Nordeste':
       cria_mapa([200,None,None,None])
-    if opção_regiao == 'Norte'
+    if opção_regiao == 'Norte':
       cria_mapa([None,200,None,None])
-    if opção_regiao == 'Sul'
+    if opção_regiao == 'Sul':
       cria_mapa([None,None,200,None])
   
   
