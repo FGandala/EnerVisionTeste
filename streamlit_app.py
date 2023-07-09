@@ -192,7 +192,8 @@ def cria_mapa_nordeste():
     cloropleth.geojson.add_child(
           folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
         )
-    hash(st_mapa = st_folium(mapa, width=1000, height=450,key='Nordeste'))
+    st_mapa = st_folium(mapa, width=1000, height=450,key='Nordeste')
+    hash(st_mapa['last_active_drawing'])
     if st_mapa['last_active_drawing']:
       st.write('kkk')
       return st_mapa['last_active_drawing']['properties']['NOME2']
