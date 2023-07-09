@@ -117,7 +117,7 @@ def cria_grafico_linhas(dados_centro_sul):
     }
 ], 'overlaid')
 
-@st.cache_data(experimental_allow_widgets=True)
+#@st.cache_data(experimental_allow_widgets=True)
 def cria_mapa(_cores):
     DATA=('https://ons-dl-prod-opendata.s3.amazonaws.com/dataset/carga_energia_di/CARGA_ENERGIA_2023.csv')
     carga=pd.read_csv(DATA,delimiter=';')
