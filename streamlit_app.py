@@ -173,7 +173,7 @@ def home():
     opção_regiao = st.sidebar('Escolha um região',('Norte','Nordeste','Centro-Sul','Sul')
     
     
-    dados_centro_sul = filtra_dados(st.session_state.estado_escolhido)
+    #dados_centro_sul = filtra_dados(st.session_state.estado_escolhido)
     #cria_grafico_linhas(dados_centro_sul)
 
 home()
