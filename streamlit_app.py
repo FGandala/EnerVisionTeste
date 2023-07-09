@@ -166,7 +166,7 @@ def home():
 
     
     
-    dados_centro_sul = filtra_dados(opção_regiao)
+    dados_centro_sul = filtra_dados(opção_regiao,coleta_dados_csv())
     cria_grafico_linhas(dados_centro_sul)
 
 home()
