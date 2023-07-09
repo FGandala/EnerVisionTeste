@@ -116,7 +116,8 @@ def cria_grafico_linhas(dados_centro_sul):
         "series": seriesOverlaidChart
     }
 ], 'overlaid')
-@st.cache_data(experimental_allow_widgets=True)
+
+
 def cria_mapa_centro_sul():
     DATA=('https://ons-dl-prod-opendata.s3.amazonaws.com/dataset/carga_energia_di/CARGA_ENERGIA_2023.csv')
     carga=pd.read_csv(DATA,delimiter=';')
@@ -152,69 +153,9 @@ def cria_mapa_centro_sul():
     cloropleth.geojson.add_child(
           folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
         )
-    return st_folium(mapa, width=1000, height=450,key='Centro-sul') 
+    st_mapa = st_folium(mapa, width=1000, height=450,key='Centro-sul') 
     
           
-
-@st.cache_resource(experimental_allow_widgets=True,ttl=10)
-def cria_mapa_nordeste():
-    DATA=('https://ons-dl-prod-opendata.s3.amazonaws.com/dataset/carga_energia_di/CARGA_ENERGIA_2023.csv')
-    carga=pd.read_csv(DATA,delimiter=';')
-    carga.nom_subsistema = carga.nom_subsistema.apply(lambda x:'Centro-sul'if(x=='Sudeste/Centro-Oeste')
-                                                  else x)
-
-
-    carga_estados={'Estados':[],
-               'Mhw':[]}
-    estados=['Nordeste','Norte','Sul','Centro-sul']
-    for i in estados:
-      carga_estados['Estados'].append(i)
-      carga_estados['Mhw'].append((carga.loc[carga.nom_subsistema==i]['val_cargaenergiamwmed'].sum()))
-
-    carga_estados=pd.DataFrame(carga_estados)
-    mapa = folium.Map(location=[-14.235,-54.2],zoom_start=4,
-                    max_zoom=4,min_zoom=4,tiles='CartoDB positron',dragging=False,prefer_canvas=True)
-  
-    carga_estados['cores']=[200,None,None,None]
-          
-    cloropleth = folium.Choropleth(
-        geo_data=coleta_localizacao(),
-        data=carga_estados,
-        columns=['Estados','cores'],
-        key_on='feature.properties.NOME2',
-        fill_color='Spectral'
-        )
-    carga_estados.set_index('Estados',inplace=True)
-    cloropleth.geojson.add_to(mapa)
-    for features in cloropleth.geojson.data['features']:
-        features['properties']['MHW'] = "Carga diária" + " : " + str(carga_estados.loc[features['properties']['NOME2']]['Mhw'])
-          
-    cloropleth.geojson.add_child(
-          folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
-        )
-    st_mapa = st_folium(mapa, width=1000, height=450,key='Nordeste')
-    hash(st_mapa)
-    if st_mapa['last_active_drawing']:
-      st.write('kkk')
-      return st_mapa['last_active_drawing']['properties']['NOME2']
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def home():
   
     st.sidebar.image('LOGO.png')
@@ -230,13 +171,6 @@ def home():
 
 
     opção_regiao = st.sidebar('Escolha um região',('Norte','Nordeste','Centro-Sul','Sul')
-    if st.session_state.estado_escolhido == 'Centro-sul':
-      st.subheader("Região Atual")
-      st_mapa=cria_mapa_centro_sul()
-    
-    if st.session_state.estado_escolhido == 'Nordeste':
-      st.subheader("Região Atual")
-      st_mapa=cria_mapa_nordeste()
     
     
     dados_centro_sul = filtra_dados(st.session_state.estado_escolhido)
