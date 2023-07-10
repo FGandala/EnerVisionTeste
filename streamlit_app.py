@@ -30,10 +30,10 @@ def cria_grafico_linhas(dados,região,tempo_inicial,tempo_final):
                            line = {'color':'darkgreen'}).encode(
      
   
-    x = dados['Datetime'],
+    x = 'Datetime',
      
   # Map the price to y-axis
-    y = dados[região]
+    y = região
   )
   st.subheader("Demanda Prevista")
   return alt.Chart(dados)
