@@ -36,7 +36,7 @@ def cria_grafico_linhas(dados,região,tempo_inicial,tempo_final):
   # Map the price to y-axis
     y = região
 )
-  st.subheader("Demanda Prevista")
+st.subheader("Demanda Prevista")
 
   
 
