@@ -30,8 +30,8 @@ def cria_grafico_linhas(dados,região,tempo_inicial,tempo_final):
                            line = {'color':'darkblue'}).encode(
      
   
-    x = alt.X('Datetime')
-    y = alt.Y('Norte')
+    alt.X('Datetime'),
+    alt.Y('Norte')
   ).properties(
     width=1000,
     height=450
