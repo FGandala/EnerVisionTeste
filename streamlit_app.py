@@ -3,10 +3,8 @@ import pandas as pd
 import folium
 from streamlit_folium import st_folium
 import datetime
-from streamlit_lightweight_charts import renderLightweightCharts
-import streamlit_lightweight_charts.dataSamples as data
-import json
 import geopandas as gpd
+import altair as alt
 
 st.set_page_config(page_title='Forecasting',layout='wide')
 
@@ -25,86 +23,22 @@ def coleta_localizacao():
 def filtra_dados(região,data_frame):
   dados = data_frame[região]
   return dados
-def converte_Data_Frame_json(data):
-  data.set_index('Unnamed: 0',inplace=True)
-  data['time']= data['Datetime'].strftime('%Y-%m-%d') 
-  data.head()
-  dados_json= json.loads(data.filter(['time','Norte'],axis=1).rename(columns={"Norte": "value"}).to_json(orient = "records"))
-  return dados_json
 
-def cria_grafico_linhas(dados_região,tempo_inicial,tempo_final):
+def cria_grafico_linhas(dados,região,tempo_inicial,tempo_final):
 
-  overlaidAreaSeriesOptions = {
-    "height": 400,
-    "rightPriceScale": {
-        "scaleMargins": {
-            "top": 0.1,
-            "bottom": 0.1,
-        },
-        "mode": 0, # PriceScaleMode: 0-Normal, 1-Logarithmic, 2-Percentage, 3-IndexedTo100
-        "borderColor": 'rgba(197, 203, 206, 0.4)',
-    },
-    "timeScale": {
-        "borderColor": 'rgba(197, 203, 206, 0.4)',
-    },
-    "layout": {
-        "background": {
-            "type": 'solid',
-            "color": '#100841'
-        },
-        "textColor": '#ffffff',
-    },
-    "grid": {
-        "vertLines": {
-            "color": 'rgba(197, 203, 206, 0.4)',
-            "style": 1, # LineStyle: 0-Solid, 1-Dotted, 2-Dashed, 3-LargeDashed
-        },
-        "horzLines": {
-            "color": 'rgba(197, 203, 206, 0.4)',
-            "style": 1, # LineStyle: 0-Solid, 1-Dotted, 2-Dashed, 3-LargeDashed
-        }
-    }
-}
-
-  seriesOverlaidChart = [
-    {
-        "type": 'Area',
-        "data": dados_região,
-        "options": {
-            "topColor": 'rgba(255, 192, 0, 0.7)',
-            "bottomColor": 'rgba(255, 192, 0, 0.3)',
-            "lineColor": 'rgba(255, 192, 0, 1)',
-            "lineWidth": 2,
-        },
-        "markers": [
-            {
-                "time": '2019-04-08',
-                "position": 'aboveBar',
-                "color": 'rgba(255, 192, 0, 1)',
-                "shape": 'arrowDown',
-                "text": 'Pico',
-                "size": 3
-            },
-            {
-                "time": '2019-05-13',
-                "position": 'belowBar',
-                "color": 'rgba(255, 192, 0, 1)',
-                "shape": 'arrowUp',
-                "text": 'Demanda Próxima Hora',
-                "size": 3
-            },
-        ]
-    }
-    
-]
+ alt.Chart(dados_região).mark_area(color = 'green',
+                           opacity = 0.5,
+                           line = {'color':'darkgreen'}).encode(
+     
+  
+    x = 'Datetime',
+     
+  # Map the price to y-axis
+    y = região
+)
   st.subheader("Demanda Prevista")
 
-  renderLightweightCharts([
-    {
-        "chart": overlaidAreaSeriesOptions,
-        "series": seriesOverlaidChart
-    }
-], 'overlaid')
+  
 
 @st.cache_data(experimental_allow_widgets=True)
 def cria_mapa(cores):
@@ -169,9 +103,17 @@ def home():
 
 
     
-    
-    dados_região = converte_Data_Frame_json(coleta_dados_csv())
-    cria_grafico_linhas(dados_região,opção_tempo_inicial,opção_tempo_final)
+    st.altair_chart(cria_grafico_linhas('Norte',1,2), theme="streamlit", use_container_width=True)
+
+
+
+
+
+
+
+
+  
+    cria_grafico_linhas(def coleta_dados_csv(),'Norte',opção_tempo_inicial,opção_tempo_final)
 
 home()
   
