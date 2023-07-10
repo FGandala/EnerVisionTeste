@@ -25,8 +25,12 @@ def coleta_localizacao():
 def filtra_dados(região,data_frame):
   dados = data_frame[região]
   return dados
-
-
+def converte_Data_Frame_json(data):
+  data.set_index('Unnamed: 0',inplace=True)
+  data['time']= pd.to_datetime(data['Datetime']).view('int64')
+  data.head()
+  dados_json= json.loads(data.filter(['time','Norte'],axis=1).rename(columns={"Norte": "value"}).to_json(orient = "records"))
+  return dados_json
 
 def cria_grafico_linhas(dados_região,tempo_inicial,tempo_final):
 
@@ -65,7 +69,7 @@ def cria_grafico_linhas(dados_região,tempo_inicial,tempo_final):
   seriesOverlaidChart = [
     {
         "type": 'Area',
-        "data": dados_região.to_json(orient="index"),
+        "data": dados_região,
         "options": {
             "topColor": 'rgba(255, 192, 0, 0.7)',
             "bottomColor": 'rgba(255, 192, 0, 0.3)',
@@ -166,7 +170,7 @@ def home():
 
     
     
-    dados_região = filtra_dados(opção_regiao,coleta_dados_csv())
+    dados_região = converte_Data_Frame_json(coleta_dados_csv())
     cria_grafico_linhas(dados_região,opção_tempo_inicial,opção_tempo_final)
 
 home()
