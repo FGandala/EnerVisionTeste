@@ -103,7 +103,7 @@ def home():
 
 
     
-    st.altair_chart(cria_grafico_linhas('Norte',1,2), theme="streamlit", use_container_width=True)
+    st.altair_chart(cria_grafico_linhas(coleta_dados_csv(),'Norte',1,2), theme="streamlit", use_container_width=True)
 
 
 
