@@ -111,9 +111,5 @@ def home():
 
 
 
-
-  
-    cria_grafico_linhas(def coleta_dados_csv(),'Norte',opção_tempo_inicial,opção_tempo_final)
-
 home()
   
