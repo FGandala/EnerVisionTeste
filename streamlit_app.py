@@ -34,7 +34,7 @@ def cria_grafico_linhas(dados,região,tempo_inicial,tempo_final):
     y = região
   ).properties(
     width=1000,
-    height=500
+    height=800
 ).configure_axis(
     labelFontSize=20,labelLimit=300)
   st.subheader("Demanda Prevista")
