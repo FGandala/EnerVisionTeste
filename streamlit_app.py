@@ -26,15 +26,15 @@ def filtra_dados(região,data_frame):
 
 def cria_grafico_linhas(dados,região,tempo_inicial,tempo_final):
 
- alt.Chart(dados_região).mark_area(color = 'green',
+ alt.Chart(dados).mark_area(color = 'green',
                            opacity = 0.5,
                            line = {'color':'darkgreen'}).encode(
      
   
-    x = 'Datetime',
+    x = dados['Datetime'],
      
   # Map the price to y-axis
-    y = região
+    y = dados[região]
 )
 st.subheader("Demanda Prevista")
 
