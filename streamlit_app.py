@@ -27,7 +27,7 @@ def filtra_dados(região,data_frame):
   return dados
 def converte_Data_Frame_json(data):
   data.set_index('Unnamed: 0',inplace=True)
-  data['time']= data['Datetime'].dt.strftime('%Y-%m-%d') 
+  data['time']= data['Datetime'].strftime('%Y-%m-%d') 
   data.head()
   dados_json= json.loads(data.filter(['time','Norte'],axis=1).rename(columns={"Norte": "value"}).to_json(orient = "records"))
   return dados_json
