@@ -32,7 +32,10 @@ def cria_grafico_linhas(dados,região,tempo_inicial,tempo_final):
   
     x = 'Datetime',
     y = região
-  )
+  ).properties(
+    width=1000,
+    height=450
+)
   st.subheader("Demanda Prevista")
   return grafico
   
