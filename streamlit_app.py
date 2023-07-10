@@ -37,7 +37,7 @@ def cria_grafico_linhas(dados,região,tempo_inicial,tempo_final):
     y = dados[região]
 )
 st.subheader("Demanda Prevista")
-
+return alt.Chart(dados)
   
 
 @st.cache_data(experimental_allow_widgets=True)
