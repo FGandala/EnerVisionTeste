@@ -25,8 +25,8 @@ def filtra_dados(região,data_frame):
   return dados
 
 def cria_grafico_linhas(dados,região,tempo_inicial,tempo_final):
-  grafico=alt.Chart(dados).mark_area(color = 'yellow',
-                           opacity = 0.5, line = {'color':'yellow'}).encode(
+  grafico=alt.Chart(dados).mark_area(color = 'lightyellow',
+                           opacity = 0.5, line = {'color':'lightyellow'}).encode(
     alt.X('Datetime'),
     alt.Y('Norte')
   ).properties(
