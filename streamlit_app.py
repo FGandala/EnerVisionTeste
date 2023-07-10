@@ -41,7 +41,7 @@ def cria_grafico_linhas(dados_região,tempo_inicial,tempo_final):
             "top": 0.1,
             "bottom": 0.1,
         },
-        "mode": 2, # PriceScaleMode: 0-Normal, 1-Logarithmic, 2-Percentage, 3-IndexedTo100
+        "mode": 0, # PriceScaleMode: 0-Normal, 1-Logarithmic, 2-Percentage, 3-IndexedTo100
         "borderColor": 'rgba(197, 203, 206, 0.4)',
     },
     "timeScale": {
