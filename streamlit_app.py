@@ -96,7 +96,7 @@ def home():
       cria_mapa([None,None,200,None])
     dados_tempo=coleta_dados_csv()
     inicio=pd.to_datetime(dados_tempo['Datetime']).iloc[0]
-    fim=pd.to_datetime(dados_tempo['Datetime']).iloc[len(dados_tempo['Datetime'])]
+    fim=pd.to_datetime(dados_tempo['Datetime']).iloc[len(dados_tempo['Datetime'])-1]
     opção_tempo_inicial = st.sidebar.date_input('Escolha uma data inicial',fim,min_value=inicio,
                                               max_value=fim,
                                               )
