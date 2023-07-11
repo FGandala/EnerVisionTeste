@@ -19,7 +19,6 @@ def coleta_dados_csv():
 def coleta_localizacao():
   localizacao = gpd.read_file('grandes_regioes_json.geojson')
   return localizacao
-@st.cache_data
 def filtra_dados(região,tempo_inicial,tempo_final):
   data_frame=coleta_dados_csv()
   dados = data_frame[região]
@@ -31,7 +30,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
   elif tempo_inicial.day != tempo_final.day: 
     a=3
   else:
-    
+    a=3
     
 def cria_grafico_linhas(dados):
   
