@@ -35,6 +35,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados=dados.loc[(dados['Datetime']>=tempo_inicial)&(dados['Datetime']<=tempo_final)]
     filtrados['Datetime']=filtrados['Datetime'].dt.time
     st.write(filtrados)
+    st.write(type(filtrados['Datetime'].iloc[0]))
     return filtrados
 def cria_grafico_linhas(dados,região):
   
