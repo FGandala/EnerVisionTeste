@@ -21,7 +21,7 @@ def coleta_localizacao():
   return localizacao
 def filtra_dados(região,tempo_inicial,tempo_final):
   data_frame=coleta_dados_csv()
-  dados = data_frame[região]
+  dados = data_frame[[região,'Datetime']]
   dados['Datetime']=pd.to_datetime(dados['Datetime'])
   if tempo_inicial.year != tempo_final.year:
     a=1
