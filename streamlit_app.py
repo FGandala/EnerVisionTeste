@@ -30,7 +30,7 @@ def cria_grafico_linhas(dados,região,tempo_inicial,tempo_final):
     alt.X('Datetime'),
     alt.Y('Norte')).properties(
     width=1000,
-    height=700).configure_axis(labelLimit=250,labelFontSize=30,grid=True)
+    height=700).configure_axis(labelLimit=250,labelFontSize=30,grid=True,title=None)
   st.subheader("Demanda Prevista")
   return grafico
   
