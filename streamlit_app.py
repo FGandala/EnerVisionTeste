@@ -96,13 +96,13 @@ def home():
       cria_mapa([None,None,200,None])
   
   
-    opção_tempo_inicial = st.sidebar.date_input('Escolha uma data inicial',datetime.datetime(2023, 5, 6,00,00,00),min_value=datetime.datetime(2023, 1, 1),
-                                              max_value=datetime.datetime(2023, 7, 3),
+    opção_tempo_inicial = st.sidebar.date_input('Escolha uma data inicial',datetime.datetime(2023, 5, 6,00,00,00),min_value=datetime.datetime(2023, 1, 1,0,0,0),
+                                              max_value=datetime.datetime(2023, 7, 3,23,0,0),
                                               )
     
   
-    opção_tempo_final = st.sidebar.date_input('Escolha uma data final',datetime.datetime(2023, 5, 6,23,00,00),min_value=datetime.datetime(2023, 1, 1),
-                                              max_value=datetime.datetime(2023, 7, 3),
+    opção_tempo_final = st.sidebar.date_input('Escolha uma data final',datetime.datetime(2023, 5, 6,23,00,00),min_value=datetime.datetime(2023, 1, 1,0,0,0),
+                                              max_value=datetime.datetime(2023, 7, 3,23,0,0),
                                               )
 
 
