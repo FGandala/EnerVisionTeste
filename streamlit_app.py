@@ -21,7 +21,7 @@ def coleta_localizacao():
   return localizacao
 def filtra_dados(região,tempo_inicial,tempo_final):
   st.write(tempo_inicial)
-  tf=datetime(tempo_inicial.year,tempo_inicial.month,tempo_inicial.day,0,0,0)
+  tf=datetime.datetime(tempo_inicial.year,tempo_inicial.month,tempo_inicial.day,0,0,0)
   data_frame=coleta_dados_csv()
   dados = data_frame[[região,'Datetime']]
   dados['Datetime']=pd.to_datetime(dados['Datetime'])
