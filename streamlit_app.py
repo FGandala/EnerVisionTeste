@@ -33,7 +33,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     a=3
   else:
     filtrados=dados.loc[(dados['Datetime']>=tempo_inicial)&(dados['Datetime']<=tempo_final)]
-    filtrados['Datetime']=filtrados['Datetime'].dt.hour.apply(lambda x:pd.to_timedelta(x,unit='h'))
+    filtrados['Datetime']=filtrados['Datetime']
     st.write(filtrados)
     return filtrados
 def cria_grafico_linhas(dados,região):
