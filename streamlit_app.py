@@ -33,15 +33,14 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     a=3
   else:
     filtrados=dados.loc[(dados['Datetime']>=tempo_inicial)&(dados['Datetime']<=tempo_final)]
-    filtrados['Datetime']=filtrados['Datetime'].dt.time
+    #filtrados['Datetime']=filtrados['Datetime'].dt.time
     st.write(filtrados)
-    st.write(type(filtrados['Datetime'].iloc[0]))
     return filtrados
 def cria_grafico_linhas(dados,região):
   
   grafico=alt.Chart(dados).mark_area(color = 'orange',
                            opacity = 0.5, line = {'color':'orange'}).encode(
-    alt.X('Datetime:T',timeUnit='hoursminutes'),
+    alt.X('Datetime'),
     alt.Y(região)).properties(
     width=1000,
     height=700).configure_axis(labelLimit=250,labelFontSize=30,grid=True,title=None)
