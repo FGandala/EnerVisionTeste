@@ -30,15 +30,9 @@ def filtra_dados(região,data_frame,tempo_inicial,tempo_final):
   elif tempo_inicial.day != tempo_final.day: 
     a=3
   else:
+    a=3
     
-      
 def cria_grafico_linhas(dados,região,tempo_inicial,tempo_final):
-    
-
-
-
-
-
   
   grafico=alt.Chart(dados).mark_area(color = 'orange',
                            opacity = 0.5, line = {'color':'orange'}).encode(
