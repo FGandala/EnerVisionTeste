@@ -109,7 +109,7 @@ def home():
 
 
     
-    st.altair_chart(cria_grafico_linhas(filtradados(opção_regiao,opção_tempo_inicial,opção_tempo_final),opção_regiao), theme="streamlit", use_container_width=True)
+    st.altair_chart(cria_grafico_linhas(filtra_dados(opção_regiao,opção_tempo_inicial,opção_tempo_final),opção_regiao), theme="streamlit", use_container_width=True)
 
 
 
