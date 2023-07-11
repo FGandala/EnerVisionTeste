@@ -34,6 +34,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
   else:
     filtrados=dados.loc[(dados['Datetime']>=tf)&(dados['Datetime']<=ti)]
     filtrados['Datetime']=filtrados['Datetime'].dt.time
+    st.write(filtrados)
     return filtrados
 def cria_grafico_linhas(dados,região):
   
