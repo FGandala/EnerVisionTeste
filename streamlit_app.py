@@ -20,8 +20,8 @@ def coleta_localizacao():
   localizacao = gpd.read_file('grandes_regioes_json.geojson')
   return localizacao
 def filtra_dados(região,tempo_inicial,tempo_final):
-  tempo_inicial=datetime(tempo_inicial.year,tempo_inicial.month,tempo_inicial.day,0,0,0)
-  tempo_final=datetime(tempo_final.year,tempo_final.month,tempo_final.day,23,0,0)
+  ti=datetime(tempo_inicial.year,tempo_inicial.month,tempo_inicial.day,0,0,0)
+  tf=datetime(tempo_final.year,tempo_final.month,tempo_final.day,23,0,0)
   data_frame=coleta_dados_csv()
   dados = data_frame[[região,'Datetime']]
   dados['Datetime']=pd.to_datetime(dados['Datetime'])
@@ -32,7 +32,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
   elif tempo_inicial.day != tempo_final.day: 
     a=3
   else:
-    filtrados=dados.loc[(dados['Datetime']>=tempo_inicial)&(dados['Datetime']<=tempo_final)]
+    filtrados=dados.loc[(dados['Datetime']>=tf)&(dados['Datetime']<=ti)]
     filtrados['Datetime']=filtrados['Datetime'].dt.time
     return filtrados
 def cria_grafico_linhas(dados,região):
