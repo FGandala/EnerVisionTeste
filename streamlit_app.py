@@ -20,7 +20,8 @@ def coleta_localizacao():
   localizacao = gpd.read_file('grandes_regioes_json.geojson')
   return localizacao
 @st.cache_data
-def filtra_dados(região,data_frame,tempo_inicial,tempo_final):
+def filtra_dados(região,tempo_inicial,tempo_final):
+  data_frame=coleta_dados_csv()
   dados = data_frame[região]
   dados['Datetime']=pd.to_datetime(dados['Datetime'])
   if tempo_inicial.year != tempo_final.year:
@@ -30,9 +31,9 @@ def filtra_dados(região,data_frame,tempo_inicial,tempo_final):
   elif tempo_inicial.day != tempo_final.day: 
     a=3
   else:
-    a=3
     
-def cria_grafico_linhas(dados,região,tempo_inicial,tempo_final):
+    
+def cria_grafico_linhas(dados):
   
   grafico=alt.Chart(dados).mark_area(color = 'orange',
                            opacity = 0.5, line = {'color':'orange'}).encode(
@@ -96,18 +97,18 @@ def home():
       cria_mapa([None,None,200,None])
   
   
-    opção_tempo_inicial = st.sidebar.date_input('Escolha uma data inicial',datetime.datetime(2023, 5, 6),min_value=datetime.datetime(2023, 1, 1),
+    opção_tempo_inicial = st.sidebar.date_input('Escolha uma data inicial',datetime.datetime(2023, 5, 6,00,00,00),min_value=datetime.datetime(2023, 1, 1),
                                               max_value=datetime.datetime(2023, 7, 3),
                                               )
     
   
-    opção_tempo_final = st.sidebar.date_input('Escolha uma data final',datetime.datetime(2023, 5, 6),min_value=datetime.datetime(2023, 1, 1),
+    opção_tempo_final = st.sidebar.date_input('Escolha uma data final',datetime.datetime(2023, 5, 6,23,00,00),min_value=datetime.datetime(2023, 1, 1),
                                               max_value=datetime.datetime(2023, 7, 3),
                                               )
 
 
     
-    st.altair_chart(cria_grafico_linhas(coleta_dados_csv(),'Norte',1,2), theme="streamlit", use_container_width=True)
+    st.altair_chart(cria_grafico_linhas(filtradados(opção_regiao,opção_tempo_inicial,opção_tempo_final)), theme="streamlit", use_container_width=True)
 
 
 
