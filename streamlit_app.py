@@ -94,15 +94,16 @@ def home():
       cria_mapa([None,200,None,None])
     if opção_regiao == 'Sul':
       cria_mapa([None,None,200,None])
-  
-  
-    opção_tempo_inicial = st.sidebar.date_input('Escolha uma data inicial',datetime.datetime(2023, 5, 6,00,00,00),min_value=datetime.datetime(2023, 1, 1,0,0,0),
-                                              max_value=datetime.datetime(2023, 7, 3,23,0,0),
+    dados_tempo=coleta_dados_csv()
+    inicio=pd.to_datetime(dados_tempo['Datetime']).iloc[0]
+    fim=pd.to_datetime(dados_tempo['Datetime']).iloc[len(dados_tempo['Datetime'])]
+    opção_tempo_inicial = st.sidebar.date_input('Escolha uma data inicial',fim,min_value=inicio,
+                                              max_value=fim,
                                               )
     
   
-    opção_tempo_final = st.sidebar.date_input('Escolha uma data final',datetime.datetime(2023, 5, 6,23,00,00),min_value=opção_tempo_inicial,
-                                              max_value=datetime.datetime(2023, 7, 3,23,0,0),
+    opção_tempo_final = st.sidebar.date_input('Escolha uma data final',opção_tempo_inicial,min_value=opção_tempo_inicial,
+                                              max_value=fim,
                                               )
 
 
