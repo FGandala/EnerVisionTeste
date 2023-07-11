@@ -20,7 +20,7 @@ def coleta_localizacao():
   localizacao = gpd.read_file('grandes_regioes_json.geojson')
   return localizacao
 def filtra_dados(região,tempo_inicial,tempo_final):
-  st.wtrite(tempo_inicial.year)
+  st.write(tempo_inicial.year)
   data_frame=coleta_dados_csv()
   dados = data_frame[[região,'Datetime']]
   dados['Datetime']=pd.to_datetime(dados['Datetime'])
