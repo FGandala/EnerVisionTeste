@@ -32,7 +32,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
   elif tempo_inicial.day != tempo_final.day: 
     a=3
   else:
-    filtrados=dados.loc[(dados['Datetime']>=tf)&(dados['Datetime']<=ti)]
+    filtrados=dados.loc[(dados['Datetime']>=tempo_inicial)&(dados['Datetime']<=tempo_final)]
     filtrados['Datetime']=filtrados['Datetime'].dt.time
     st.write(filtrados)
     return filtrados
