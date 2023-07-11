@@ -20,11 +20,26 @@ def coleta_localizacao():
   localizacao = gpd.read_file('grandes_regioes_json.geojson')
   return localizacao
 @st.cache_data
-def filtra_dados(região,data_frame):
+def filtra_dados(região,data_frame,tempo_inicial,tempo_final):
   dados = data_frame[região]
-  return dados
-
+  dados['Datetime']=pd.to_datetime(dados['Datetime'])
+  if tempo_inicial.year != tempo_final.year:
+    a=1
+  elif tempo_inicial.month != tempo_final.month:
+    a=2
+  elif tempo_inicial.day != tempo_final.day: 
+    a=3
+  else:
+    
+      
 def cria_grafico_linhas(dados,região,tempo_inicial,tempo_final):
+    
+
+
+
+
+
+  
   grafico=alt.Chart(dados).mark_area(color = 'orange',
                            opacity = 0.5, line = {'color':'orange'}).encode(
     alt.X('Datetime'),
@@ -87,13 +102,13 @@ def home():
       cria_mapa([None,None,200,None])
   
   
-    opção_tempo_inicial = st.sidebar.date_input('Escolha uma data inicial',datetime.date(2023, 5, 6),min_value=datetime.date(2023, 1, 1),
-                                              max_value=datetime.date(2023, 7, 3),
+    opção_tempo_inicial = st.sidebar.date_input('Escolha uma data inicial',datetime.datetime(2023, 5, 6),min_value=datetime.datetime(2023, 1, 1),
+                                              max_value=datetime.datetime(2023, 7, 3),
                                               )
     
   
-    opção_tempo_final = st.sidebar.date_input('Escolha uma data final',datetime.date(2023, 5, 6),min_value=datetime.date(2023, 1, 1),
-                                              max_value=datetime.date(2023, 7, 3),
+    opção_tempo_final = st.sidebar.date_input('Escolha uma data final',datetime.datetime(2023, 5, 6),min_value=datetime.datetime(2023, 1, 1),
+                                              max_value=datetime.datetime(2023, 7, 3),
                                               )
 
 
