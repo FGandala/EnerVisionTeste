@@ -25,6 +25,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
   data_frame=coleta_dados_csv()
   dados = data_frame[[região,'Datetime']]
   dados.isetitem(0, pd.to_datetime(dados.iloc[:,0]))
+  st.write(dados)
   if tempo_inicial.year != tempo_final.year:
     a=1
   elif tempo_inicial.month != tempo_final.month:
@@ -35,7 +36,6 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados=dados.loc[(dados['Datetime']>=tempo_inicial)&(dados['Datetime']<=tempo_final)]
     dados_finais={região:filtrados[região],'Datetime':filtrados['Datetime'].apply(lambda x:pd.to_timedelta(x.hour,unit='h'))}
     dados_finais=pd.DataFrame(dados_finais)
-    st.write(filtrados)
     return dados_finais
 def cria_grafico_linhas(dados,região):
   
