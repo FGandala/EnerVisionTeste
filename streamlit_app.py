@@ -25,7 +25,6 @@ def filtra_dados(região,tempo_inicial,tempo_final):
   data_frame=coleta_dados_csv()
   dados = {região:data_frame[região],'Datetime':pd.to_datetime(data_frame['Datetime'])}
   dados = pd.DataFrame(dados)
-  st.write(dados)
   if tempo_inicial.year != tempo_final.year:
     a=1
   elif tempo_inicial.month != tempo_final.month:
@@ -41,7 +40,7 @@ def cria_grafico_linhas(dados,região):
   
   grafico=alt.Chart(dados).mark_area(color = 'orange',
                            opacity = 0.5, line = {'color':'orange'}).encode(
-    alt.X('Datetime:T'),
+    alt.X('Datetime'),
     alt.Y(região)).properties(
     width=1000,
     height=700).configure_axis(labelLimit=250,labelFontSize=30,grid=True,title=None)
