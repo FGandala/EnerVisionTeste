@@ -65,7 +65,7 @@ def cria_grafico_linhas(dados):
   teste = alt.layer(
     seletores, pontos, texto, regua, grafico
   ).properties(
-    width=600, height=300
+    width=1000, height=450
   ).configure_axis(labelLimit=250,labelFontSize=20,grid=True,title=None)
 
   
