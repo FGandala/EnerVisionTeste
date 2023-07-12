@@ -33,7 +33,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
   else:
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
     st.write(filtrados)
-    return dados_finais
+    return filtrados
 def cria_grafico_linhas(dados,região):
   
   grafico=alt.Chart(dados).mark_area(color = 'orange',
