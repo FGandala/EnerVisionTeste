@@ -25,6 +25,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
   tempo_final=datetime.datetime(tempo_final.year,tempo_final.month,tempo_final.day,23,0,0)
   data_frame=coleta_dados_csv()[[região,'Datetime']]
   data_frame['Datetime']=pd.to_datetime(data_frame['Datetime'])
+
   if tempo_inicial.year != tempo_final.year:
     a=1
   elif tempo_inicial.month != tempo_final.month and len(escala_do_dia) > 120 :
@@ -35,6 +36,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados.set_index('Datetime',inplace=True)
     filtrados= filtrados.resample('D').sum()
     filtrados = filtrados.reset_index()
+    filtrados['Datetime']=filtrados['Datetime'].dt.t.strftime("%m:%d")
     st.write(filtrados)
   
   else:
