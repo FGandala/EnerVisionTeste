@@ -38,8 +38,8 @@ def cria_grafico_linhas(dados,região):
   
   grafico=alt.Chart(dados).mark_area(color = 'orange',
                            opacity = 0.5, line = {'color':'orange'}).encode(
-    alt.X('Datetime'),
-    alt.Y(região)).properties(
+    alt.X('Datetime',tittle='Tempo:'),
+    alt.Y(região,tittle='Mhw:')).properties(
     width=1000,
     height=450).configure_axis(labelLimit=250,labelFontSize=20,grid=True,title=None)
   st.subheader("Demanda Prevista")
