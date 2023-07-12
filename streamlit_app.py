@@ -22,9 +22,7 @@ def coleta_localizacao():
 def filtra_dados(região,tempo_inicial,tempo_final):
   tempo_inicial=datetime.datetime(tempo_inicial.year,tempo_inicial.month,tempo_inicial.day,0,0,0)
   tempo_final=datetime.datetime(tempo_final.year,tempo_final.month,tempo_final.day,23,0,0)
-  data_frame=coleta_dados_csv()
-  dados = {região:data_frame[região],'Datetime':pd.to_datetime(data_frame['Datetime'])}
-  dados = pd.DataFrame(dados)
+  data_frame=coleta_dados_csv()[[região,'Datetime']]
   if tempo_inicial.year != tempo_final.year:
     a=1
   elif tempo_inicial.month != tempo_final.month:
@@ -32,9 +30,8 @@ def filtra_dados(região,tempo_inicial,tempo_final):
   elif tempo_inicial.day != tempo_final.day: 
     a=3
   else:
-    filtrados=dados.loc[(dados['Datetime']>=tempo_inicial)&(dados['Datetime']<=tempo_final)]
-    dados_finais={região:filtrados[região],'Datetime':filtrados['Datetime'].apply(lambda x:pd.to_timedelta(x.hour,unit='h'))}
-    dados_finais=pd.DataFrame(dados_finais)
+    filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
+    st.write(filtrados)
     return dados_finais
 def cria_grafico_linhas(dados,região):
   
