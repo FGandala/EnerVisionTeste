@@ -53,7 +53,9 @@ def cria_grafico_linhas(dados):
     opacity=alt.condition(pontos_proximos, alt.value(1), alt.value(0))
       )
   texto = grafico.mark_text(align='center', dx=0, dy=-30).encode(
-    text=alt.condition(pontos_proximos, 'Mhw', alt.value(' ')),color='orange'
+    text=alt.condition(pontos_proximos, 'Mhw', alt.value(' ')),
+    color='Mhw',fontSize=15,
+    
       )
   regua = alt.Chart(dados).mark_rule(color='gray').encode(
     x='Tempo',y='Mhw',
