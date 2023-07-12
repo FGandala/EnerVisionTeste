@@ -36,6 +36,11 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
     return filtrados
 def cria_grafico_linhas(dados):
+  grafico=alt.Chart(dados).mark_area(color = 'orange',
+                           opacity = 0.5, line = {'color':'orange'}).encode(
+    alt.X('Tempo',axis=alt.Axis(labelAngle=-30)),
+    alt.Y('Mhw',scale=alt.Scale(domain=[0, (dados['Mhw'].max()*1.3).round()]))).configure_axis(labelLimit=250,labelFontSize=20,grid=True,title=None)
+  
   pontos_proximos = alt.selection_point(nearest=True, on='mouseover',
                         fields=['x'], empty=False)
   seletores = alt.Chart(dados).mark_point().encode(
@@ -44,10 +49,10 @@ def cria_grafico_linhas(dados):
   ).add_params(
     pontos_proximos
   )
-  pontos = line.mark_point().encode(
+  pontos = grafico.mark_point().encode(
     opacity=alt.condition(pontos_proximos, alt.value(1), alt.value(0))
       )
-  texto = line.mark_text(align='left', dx=5, dy=-5).encode(
+  texto = grafico.mark_text(align='left', dx=5, dy=-5).encode(
     text=alt.condition(pontos_proximos, 'Mhw', alt.value(' '))
       )
   regua = alt.Chart(dados).mark_rule(color='gray').encode(
@@ -56,10 +61,7 @@ def cria_grafico_linhas(dados):
     pontos_proximos
   )
   
-  grafico=alt.Chart(dados).mark_area(color = 'orange',
-                           opacity = 0.5, line = {'color':'orange'}).encode(
-    alt.X('Tempo',axis=alt.Axis(labelAngle=-30)),
-    alt.Y('Mhw',scale=alt.Scale(domain=[0, (dados['Mhw'].max()*1.3).round()]))).configure_axis(labelLimit=250,labelFontSize=20,grid=True,title=None)
+  
   teste = alt.layer(
     seletores, pontos, texto, regua, grafico
   ).properties(
