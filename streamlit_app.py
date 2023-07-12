@@ -42,7 +42,7 @@ def cria_grafico_linhas(dados):
     x='Tempo',
     opacity=alt.value(0),
   ).add_params(
-    nearest
+    pontos_proximos
   )
   pontos = line.mark_point().encode(
     opacity=alt.condition(pontos_proximos, alt.value(1), alt.value(0))
