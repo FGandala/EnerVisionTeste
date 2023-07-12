@@ -57,8 +57,8 @@ def filtra_dados(região,tempo_inicial,tempo_final):
 def cria_grafico_linhas(dados):
   grafico=alt.Chart(dados).mark_area(color = 'orange',
                            opacity = 0.5, line = {'color':'orange'}).encode(
-    alt.X('Tempo',axis=alt.Axis(labelAngle=0)),
-    alt.Y('Mhw',scale=alt.Scale(domain=[0, (dados['Mhw'].max()*1.3).round()])))
+    alt.X('Tempo',sort=None,axis=alt.Axis(labelAngle=0)),
+    alt.Y('Mhw', sort=None,scale=alt.Scale(domain=[0, (dados['Mhw'].max()*1.3).round()])))
   
   pontos_proximos = alt.selection_point(nearest=True, on='mouseover',
                         fields=['Tempo','Mhw'], empty=False)
