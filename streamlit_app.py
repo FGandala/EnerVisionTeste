@@ -42,7 +42,7 @@ def cria_grafico_linhas(dados):
     alt.Y('Mhw',scale=alt.Scale(domain=[0, (dados['Mhw'].max()*1.3).round()])))
   
   pontos_proximos = alt.selection_point(nearest=True, on='mouseover',
-                        fields=['x'], empty=False)
+                        fields=['Tempo'], empty=False)
   seletores = alt.Chart(dados).mark_point().encode(
     x='Tempo',
     opacity=alt.value(0),
