@@ -20,6 +20,8 @@ def coleta_localizacao():
   localizacao = gpd.read_file('grandes_regioes_json.geojson')
   return localizacao
 def filtra_dados(região,tempo_inicial,tempo_final):
+  escala_de_dia = pd.date_range(start=tempo_inicial, end=tempo_final)
+  st.write(len(escala_de_dia))
   tempo_inicial=datetime.datetime(tempo_inicial.year,tempo_inicial.month,tempo_inicial.day,0,0,0)
   tempo_final=datetime.datetime(tempo_final.year,tempo_final.month,tempo_final.day,23,0,0)
   data_frame=coleta_dados_csv()[[região,'Datetime']]
@@ -28,7 +30,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     a=1
   elif tempo_inicial.month != tempo_final.month:
     a=2
-  elif tempo_inicial.day != tempo_final.day: 
+  elif tempo_inicial.day != tempo_final.day and len(escala_do_dia) < 90: 
     a=3
   else:
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
@@ -63,7 +65,7 @@ def cria_grafico_linhas(dados):
   )
   
   
-  teste = alt.layer(
+  grafico_real = alt.layer(
     seletores, pontos, texto, regua, grafico
   ).properties(
     width=1000, height=450
@@ -71,7 +73,7 @@ def cria_grafico_linhas(dados):
 
   
   st.subheader("Demanda Prevista")
-  return teste
+  return grafico_real
   
 
 @st.cache_data(experimental_allow_widgets=True)
