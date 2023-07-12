@@ -35,7 +35,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados.set_index('Datetime',inplace=True)
     filtrados= filtrados.resample('D').sum()
     filtrados['Datetime']= filtrados['Datetime'].copy().dt.strftime("%M:%D")
-     st.write(filtrados)
+    st.write(filtrados)
   
   else:
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
