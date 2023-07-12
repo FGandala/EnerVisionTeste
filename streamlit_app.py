@@ -59,7 +59,7 @@ def cria_grafico_linhas(dados):
   regua = alt.Chart(dados).mark_rule(color='gray').encode(
     x='Tempo',y='Mhw',
   )
-    pontos_proximos
+  pontos_proximos
   )
   
   
