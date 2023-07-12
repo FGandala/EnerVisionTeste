@@ -52,7 +52,7 @@ def cria_grafico_linhas(dados):
   pontos = grafico.mark_point().encode(
     opacity=alt.condition(pontos_proximos, alt.value(1), alt.value(0))
       )
-  texto = grafico.mark_text(align='left', dx=15, dy=-30).encode(
+  texto = grafico.mark_text(align='left', dx=0, dy=-30).encode(
     text=alt.condition(pontos_proximos, 'Mhw', alt.value(' '))
       )
   regua = alt.Chart(dados).mark_rule(color='gray').encode(
