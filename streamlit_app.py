@@ -35,8 +35,8 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados= filtrados.resample('M').sum()
     filtrados = filtrados.reset_index()
     filtrados['Datetime']= pd.to_datetime(filtrados['Datetime'], format='%m').dt.month_name().str.slice(stop=3)
-    st.write(filtrados)
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
+    st.write(filtrados)
     return filtrados
   elif tempo_inicial.day != tempo_final.day : 
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
