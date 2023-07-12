@@ -34,7 +34,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados['Datetime'] = pd.DatetimeIndex(filtrados['Datetime'])
     filtrados.set_index('Datetime',inplace=True)
     filtrados= filtrados.resample('D').sum()
-    filtrados['Datetime']= filtrados.index.dt.strftime("%M:%D")
+    filtrados['Datetime']= pd.datetime(filtrados.index).dt.strftime("%M:%D")
     st.write(filtrados)
   
   else:
