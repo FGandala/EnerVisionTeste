@@ -36,6 +36,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados = filtrados.reset_index()
     filtrados['Datetime']=filtrados['Datetime'].dt.strftime("%m")
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
+    return filtrados
   elif tempo_inicial.day != tempo_final.day : 
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
     filtrados['Datetime'] = pd.DatetimeIndex(filtrados['Datetime'])
