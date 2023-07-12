@@ -21,17 +21,22 @@ def coleta_localizacao():
   return localizacao
 def filtra_dados(região,tempo_inicial,tempo_final):
   escala_de_dia = pd.date_range(start=tempo_inicial, end=tempo_final)
-  st.write(len(escala_de_dia))
   tempo_inicial=datetime.datetime(tempo_inicial.year,tempo_inicial.month,tempo_inicial.day,0,0,0)
   tempo_final=datetime.datetime(tempo_final.year,tempo_final.month,tempo_final.day,23,0,0)
   data_frame=coleta_dados_csv()[[região,'Datetime']]
   data_frame['Datetime']=pd.to_datetime(data_frame['Datetime'])
   if tempo_inicial.year != tempo_final.year:
     a=1
-  elif tempo_inicial.month != tempo_final.month:
+  elif tempo_inicial.month != tempo_final.month and len(escala_do_dia) > 120 :
     a=2
-  elif tempo_inicial.day != tempo_final.day and len(escala_do_dia) < 90: 
-    a=3
+  elif tempo_inicial.day != tempo_final.day : 
+    filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
+    filtrados['Datetime'] = pd.DatetimeIndex(filtrados['Datetime'])
+    filtrados.set_index('Datetime')
+    filtrados= filtrados.asfreq('D')
+    st.write(filtrados)
+    filtrados['Datetime']= filtrados['Datetime'].copy().dt.strftime("%M:%D")
+  
   else:
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
     filtrados['Datetime']= filtrados['Datetime'].copy().dt.strftime("%H:%M")
