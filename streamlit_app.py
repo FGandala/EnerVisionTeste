@@ -34,7 +34,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados.set_index('Datetime',inplace=True)
     filtrados= filtrados.resample('M').sum()
     filtrados = filtrados.reset_index()
-    filtrados['Datetime']= pd.to_datetime(filtrados['Datetime'], format='%m')
+    filtrados['Datetime']= filtrados['Datetime'].dt.strftime("%m")
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
     st.write(filtrados)
     return filtrados
@@ -44,7 +44,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados.set_index('Datetime',inplace=True)
     filtrados= filtrados.resample('D').sum()
     filtrados = filtrados.reset_index()
-    filtrados['Datetime']=pd.to_datetime(filtrados['Datetime'].dt.strftime("%m/%d"))
+    filtrados['Datetime']=filtrados['Datetime'].dt.strftime("%m/%d")
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
     return filtrados
   
@@ -57,7 +57,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
 def cria_grafico_linhas(dados):
   grafico=alt.Chart(dados).mark_area(color = 'orange',
                            opacity = 0.5, line = {'color':'orange'}).encode(
-    alt.X('Tempo',axis=alt.Axis(labelAngle=0)),
+    alt.X('Tempo',sort=None,axis=alt.Axis(labelAngle=0)),
     alt.Y('Mhw',scale=alt.Scale(domain=[0, (dados['Mhw'].max()*1.3).round()])))
   
   pontos_proximos = alt.selection_point(nearest=True, on='mouseover',
