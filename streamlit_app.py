@@ -38,8 +38,8 @@ def filtra_dados(região,tempo_inicial,tempo_final):
 def cria_grafico_linhas(dados):
   pontos_proximos = alt.selection_point(nearest=True, on='mouseover',
                         fields=['x'], empty=False)
-  seletores = alt.Chart(source).mark_point().encode(
-    x='x:Q',
+  seletores = alt.Chart(dados).mark_point().encode(
+    x='Tempo',
     opacity=alt.value(0),
   ).add_params(
     nearest
@@ -50,8 +50,8 @@ def cria_grafico_linhas(dados):
   texto = line.mark_text(align='left', dx=5, dy=-5).encode(
     text=alt.condition(nearest, 'y:Q', alt.value(' '))
       )
-  regua = alt.Chart(source).mark_rule(color='gray').encode(
-    x='x:Q',
+  regua = alt.Chart(dados).mark_rule(color='gray').encode(
+    x='Tempo',
   ).transform_filter(
     nearest
   )
