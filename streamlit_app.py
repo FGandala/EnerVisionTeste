@@ -56,7 +56,7 @@ def cria_grafico_linhas(dados):
     text=alt.condition(pontos_proximos, 'Mhw', alt.value(' '))
       )
   regua = alt.Chart(dados).mark_rule(color='gray').encode(
-    x='Tempo',
+    x='Tempo',y='Mhw',
   ).transform_filter(
     pontos_proximos
   )
