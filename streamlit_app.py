@@ -44,7 +44,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados.set_index('Datetime',inplace=True)
     filtrados= filtrados.resample('D').sum()
     filtrados = filtrados.reset_index()
-    filtrados['Datetime']=pd.to_datetime(filtrados['Datetime'].dt.strftime("%d/%m"))
+    filtrados['Datetime']=pd.to_datetime(filtrados['Datetime'].dt.strftime("%m/%d"))
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
     return filtrados
   
