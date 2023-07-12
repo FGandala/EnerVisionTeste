@@ -38,7 +38,7 @@ def cria_grafico_linhas(dados,região):
   
   grafico=alt.Chart(dados).mark_area(color = 'orange',
                            opacity = 0.5, line = {'color':'orange'}).encode(
-    alt.X('Datetime'),
+    alt.X('Datetime:T'),
     alt.Y(região)).properties(
     width=1000,
     height=700).configure_axis(labelLimit=250,labelFontSize=30,grid=True,title=None)
