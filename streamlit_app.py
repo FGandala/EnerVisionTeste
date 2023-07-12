@@ -29,7 +29,13 @@ def filtra_dados(região,tempo_inicial,tempo_final):
   if tempo_inicial.year != tempo_final.year:
     a=1
   elif tempo_inicial.month != tempo_final.month and len(escala_do_dia) > 120 :
-    a=2
+    filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
+    filtrados['Datetime'] = pd.DatetimeIndex(filtrados['Datetime'])
+    filtrados.set_index('Datetime',inplace=True)
+    filtrados= filtrados.resample('M').sum()
+    filtrados = filtrados.reset_index()
+    filtrados['Datetime']=filtrados['Datetime'].dt.strftime("%m")
+    filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
   elif tempo_inicial.day != tempo_final.day : 
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
     filtrados['Datetime'] = pd.DatetimeIndex(filtrados['Datetime'])
@@ -39,7 +45,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados['Datetime']=filtrados['Datetime'].dt.strftime("%d/%m")
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
     return filtrados
-    st.write(filtrados)
+  
   
   else:
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
