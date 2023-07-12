@@ -34,7 +34,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados.set_index('Datetime',inplace=True)
     filtrados= filtrados.resample('M').sum()
     filtrados = filtrados.reset_index()
-    filtrados['Datetime']=filtrados['Datetime'].dt.strftime("%m")
+    filtrados['Datetime']=filtrados['Datetime'].dt.strftime("%m").dt.month_name().str.slice(stop=3)
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
     return filtrados
   elif tempo_inicial.day != tempo_final.day : 
