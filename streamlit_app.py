@@ -53,7 +53,7 @@ def cria_grafico_linhas(dados):
     opacity=alt.condition(pontos_proximos, alt.value(1), alt.value(0))
       )
   texto = grafico.mark_text(align='center', dx=0, dy=-30,color='orange',size=20).encode(
-    y='y'
+    y='y',
     text=alt.condition(pontos_proximos, 'Mhw', alt.value(' ')),
     
       ).transform_filter(label=f'format(datum.{y},".1f") + " Mhw"'))
