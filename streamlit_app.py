@@ -24,7 +24,8 @@ def filtra_dados(região,tempo_inicial,tempo_final):
   tempo_final=datetime.datetime(tempo_final.year,tempo_final.month,tempo_final.day,23,0,0)
   data_frame=coleta_dados_csv()[[região,'Datetime']]
   data_frame['Datetime']=pd.to_datetime(data_frame['Datetime'])
-  
+  if tempo_inicial.year != tempo_final.year:
+    a=1
   elif tempo_inicial.month != tempo_final.month:
     a=2
   elif tempo_inicial.day != tempo_final.day: 
