@@ -35,7 +35,6 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados.set_index('Datetime')
     st.write(filtrados)
     filtrados= filtrados.asfreq('D')
-    st.write(filtrados)
     filtrados['Datetime']= filtrados['Datetime'].copy().dt.strftime("%M:%D")
   
   else:
