@@ -45,15 +45,15 @@ def cria_grafico_linhas(dados):
     nearest
   )
   pontos = line.mark_point().encode(
-    opacity=alt.condition(nearest, alt.value(1), alt.value(0))
+    opacity=alt.condition(pontos_proximos, alt.value(1), alt.value(0))
       )
   texto = line.mark_text(align='left', dx=5, dy=-5).encode(
-    text=alt.condition(nearest, 'y:Q', alt.value(' '))
+    text=alt.condition(pontos_proximos, 'Mhw', alt.value(' '))
       )
   regua = alt.Chart(dados).mark_rule(color='gray').encode(
     x='Tempo',
   ).transform_filter(
-    nearest
+    pontos_proximos
   )
   
   grafico=alt.Chart(dados).mark_area(color = 'orange',
