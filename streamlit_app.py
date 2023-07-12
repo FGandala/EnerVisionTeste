@@ -34,7 +34,6 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
     filtrados['Datetime']= filtrados['Datetime'].copy().dt.strftime("%H:%M")
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
-    st.write(filtrados)
     return filtrados
 def cria_grafico_linhas(dados):
   
