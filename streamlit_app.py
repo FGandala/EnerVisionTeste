@@ -37,6 +37,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados= filtrados.resample('D').sum()
     filtrados = filtrados.reset_index()
     filtrados['Datetime']=filtrados['Datetime'].dt.strftime("%m:%d")
+    return filtrados
     st.write(filtrados)
   
   else:
