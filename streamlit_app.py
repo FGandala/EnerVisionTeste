@@ -33,13 +33,14 @@ def filtra_dados(região,tempo_inicial,tempo_final):
   else:
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
     filtrados['Datetime']= filtrados['Datetime'].copy().dt.strftime("%H:%M")
+    filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'})
     return filtrados
-def cria_grafico_linhas(dados,região):
+def cria_grafico_linhas(dados):
   
   grafico=alt.Chart(dados).mark_area(color = 'orange',
                            opacity = 0.5, line = {'color':'orange'}).encode(
-    alt.X('Datetime',title='Tempo:'),
-    alt.Y(região,title='Mhw:')).properties(
+    alt.X('Tempo'),
+    alt.Y('Mhw')).properties(
     width=1000,
     height=450).configure_axis(labelLimit=250,labelFontSize=20,grid=True,title=None)
   st.subheader("Demanda Prevista")
@@ -111,7 +112,7 @@ def home():
 
     
     
-    st.altair_chart(cria_grafico_linhas(filtra_dados(opção_regiao,opção_tempo_inicial,opção_tempo_final),opção_regiao), theme="streamlit", use_container_width=True)
+    st.altair_chart(cria_grafico_linhas(filtra_dados(opção_regiao,opção_tempo_inicial,opção_tempo_final)), theme="streamlit", use_container_width=True)
 
 
 
