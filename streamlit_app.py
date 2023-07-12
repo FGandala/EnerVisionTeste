@@ -36,15 +36,39 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
     return filtrados
 def cria_grafico_linhas(dados):
+  pontos_proximos = alt.selection_point(nearest=True, on='mouseover',
+                        fields=['x'], empty=False)
+  seletores = alt.Chart(source).mark_point().encode(
+    x='x:Q',
+    opacity=alt.value(0),
+  ).add_params(
+    nearest
+  )
+  pontos = line.mark_point().encode(
+    opacity=alt.condition(nearest, alt.value(1), alt.value(0))
+      )
+  texto = line.mark_text(align='left', dx=5, dy=-5).encode(
+    text=alt.condition(nearest, 'y:Q', alt.value(' '))
+      )
+  regua = alt.Chart(source).mark_rule(color='gray').encode(
+    x='x:Q',
+  ).transform_filter(
+    nearest
+  )
   
   grafico=alt.Chart(dados).mark_area(color = 'orange',
                            opacity = 0.5, line = {'color':'orange'}).encode(
     alt.X('Tempo',axis=alt.Axis(labelAngle=-30)),
-    alt.Y('Mhw',scale=alt.Scale(domain=[0, (dados['Mhw'].max()*1.3).round()]))).properties(
-    width=1000,
-    height=450).configure_axis(labelLimit=250,labelFontSize=20,grid=True,title=None)
+    alt.Y('Mhw',scale=alt.Scale(domain=[0, (dados['Mhw'].max()*1.3).round()]))).configure_axis(labelLimit=250,labelFontSize=20,grid=True,title=None)
+  teste = alt.layer(
+    seletores, pontos, texto, regua, grafico
+  ).properties(
+    width=600, height=300
+  )
+
+  
   st.subheader("Demanda Prevista")
-  return grafico
+  return teste
   
 
 @st.cache_data(experimental_allow_widgets=True)
