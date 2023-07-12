@@ -39,8 +39,8 @@ def cria_grafico_linhas(dados):
   
   grafico=alt.Chart(dados).mark_area(color = 'orange',
                            opacity = 0.5, line = {'color':'orange'}).encode(
-    alt.X('Tempo',scale=alt.Scale(domain=[0, (dados['Mhw'].max()*1.5)])),
-    alt.Y('Mhw')).properties(
+    alt.X('Tempo'),
+    alt.Y('Mhw',scale=alt.Scale(domain=[0, (dados['Mhw'].max()*1.5).round()]))).properties(
     width=1000,
     height=450).configure_axis(labelLimit=250,labelFontSize=20,grid=True,title=None)
   st.subheader("Demanda Prevista")
