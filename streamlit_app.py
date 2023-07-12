@@ -32,7 +32,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
   elif tempo_inicial.day != tempo_final.day : 
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
     filtrados['Datetime'] = pd.DatetimeIndex(filtrados['Datetime'])
-    filtrados.set_index('Datetime')
+    filtrados.set_index('Datetime',inplace=True)
     st.write(filtrados)
     filtrados= filtrados.asfreq('D')
     filtrados['Datetime']= filtrados['Datetime'].copy().dt.strftime("%M:%D")
