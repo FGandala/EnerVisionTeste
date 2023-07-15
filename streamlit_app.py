@@ -36,7 +36,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados = filtrados.reset_index()
     filtrados['Datetime']= filtrados['Datetime'].dt.month_name().str[:3]
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
-    filtrados['Tempo']=filtrados['Tempo'].astype(str)
+    filtrados['Tempo2']=filtrados['Tempo'].astype(str)
     st.write(filtrados)
     st.write(filtrados.dtypes)
     return filtrados
