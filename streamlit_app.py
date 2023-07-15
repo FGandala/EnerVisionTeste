@@ -37,6 +37,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados['Datetime']= filtrados['Datetime'].dt.month_name().str[:3]
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
     st.write(filtrados)
+    print(filtrados.dtypes)
     return filtrados
   elif tempo_inicial.day != tempo_final.day : 
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
@@ -46,7 +47,6 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados = filtrados.reset_index()
     filtrados['Datetime']=filtrados['Datetime'].dt.strftime("%m/%d")
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
-    print(filtrados.dtypes)
     return filtrados
   
   
