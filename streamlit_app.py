@@ -37,7 +37,8 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados = filtrados.reset_index()
     st.write(filtrados.dtypes)
     st.write(filtrados)
-    meses_numeros = filtrados['Datetime'].dt.month.astype('int64')
+    meses_numeros = filtrados['Datetime'].dt.month
+    st.write(filtrados.dtypes)
     meses = meses_numeros.apply(lambda x: numero_mes[x])
     filtrados['Datetime']=meses
     st.write(meses)
