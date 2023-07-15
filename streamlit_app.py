@@ -29,14 +29,11 @@ def filtra_dados(região,tempo_inicial,tempo_final):
   if tempo_inicial.year != tempo_final.year:
     a=1
   elif tempo_inicial.month != tempo_final.month and len(escala_do_dia) > 90 :
-    numero_mes=[1640995200, 1643673600, 1646092800, 1648771200, 1651363200, 1654041600, 1656633600, 1659312000, 1661990400, 1664582400, 1667260800, 1669852800]
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
     filtrados['Datetime'] = pd.DatetimeIndex(filtrados['Datetime'])
     filtrados.set_index('Datetime',inplace=True)
     filtrados = filtrados.resample('M').sum()
     filtrados = filtrados.reset_index()
-    meses = filtrados['Datetime'].map(lambda x: numero_mes[int(x.month) - 1])
-    filtrados['Datetime']=meses
     st.write(meses)
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
     st.write(filtrados)
@@ -61,7 +58,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
 def cria_grafico_linhas(dados):
   grafico=alt.Chart(dados).mark_area(color = 'orange',
                            opacity = 0.5, line = {'color':'orange'}).encode(
-    alt.X('Tempo',sort=None,axis=alt.Axis(labelAngle=0)),
+    alt.X('Tempo',sort=None,axis=alt.Axis(format='%b',labelAngle=0)),
     alt.Y('Mhw',scale=alt.Scale(domain=[0, (dados['Mhw'].max()*1.3).round()])))
   
   pontos_proximos = alt.selection_point(nearest=True, on='mouseover',
