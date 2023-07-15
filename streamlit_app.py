@@ -37,7 +37,6 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados = filtrados.reset_index()
     meses_numeros = filtrados['Datetime'].dt.month
     meses = meses_numeros.apply(lambda x: numero_mes[x])
-    filtrados['Datetime'] = meses.to_string() 
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
     st.write(filtrados)
     st.write(filtrados.dtypes)
@@ -61,7 +60,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
 def cria_grafico_linhas(dados):
   grafico=alt.Chart(dados).mark_area(color = 'orange',
                            opacity = 0.5, line = {'color':'orange'}).encode(
-    alt.X('Tempo',sort=None,axis=alt.Axis(labelAngle=0)),
+    alt.X('Tempo',timeUnit='month',sort=None,axis=alt.Axis(labelAngle=0)),
     alt.Y('Mhw',scale=alt.Scale(domain=[0, (dados['Mhw'].max()*1.3).round()])))
   
   pontos_proximos = alt.selection_point(nearest=True, on='mouseover',
