@@ -29,7 +29,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
   if tempo_inicial.year != tempo_final.year:
     a=1
   elif tempo_inicial.month != tempo_final.month and len(escala_do_dia) > 90 :
-    numero_mes=["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+    numero_mes=[1640995200, 1643673600, 1646092800, 1648771200, 1651363200, 1654041600, 1656633600, 1659312000, 1661990400, 1664582400, 1667260800, 1669852800]
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
     filtrados['Datetime'] = pd.DatetimeIndex(filtrados['Datetime'])
     filtrados.set_index('Datetime',inplace=True)
