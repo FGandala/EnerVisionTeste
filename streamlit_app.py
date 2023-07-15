@@ -35,7 +35,8 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados.set_index('Datetime',inplace=True)
     filtrados= filtrados.resample('M').sum()
     filtrados = filtrados.reset_index()
-    meses = filtrados['Datetime'].apply(lambda x: numero_mes[x])
+    meses_numeros = pd.DatetimeIndex(filtrados['Datetime']).month
+    meses = meses_numeros.apply(lambda x: numero_mes[x])
     filtrados['Datetime'] = meses 
     st.write(filtrados)
     st.write(filtrados.dtypes)
