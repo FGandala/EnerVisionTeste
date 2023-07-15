@@ -39,7 +39,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     meses_numeros = filtrados['Datetime'].dt.date
     st.write(filtrados.dtypes)
     meses = meses_numeros.map(lambda x: numero_mes[x.month])
-    #filtrados['Datetime']=meses
+    filtrados['Datetime']=meses
     st.write(meses)
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
     st.write(filtrados)
