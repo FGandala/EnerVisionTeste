@@ -33,6 +33,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados['Datetime'] = pd.DatetimeIndex(filtrados['Datetime'])
     filtrados.set_index('Datetime',inplace=True)
     filtrados.groupby(pd.Grouper(freq='M')) 
+    st.write(filtrados)
     return filtrados
   elif tempo_inicial.day != tempo_final.day : 
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
