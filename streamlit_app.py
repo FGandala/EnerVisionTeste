@@ -29,14 +29,14 @@ def filtra_dados(região,tempo_inicial,tempo_final):
   if tempo_inicial.year != tempo_final.year:
     a=1
   elif tempo_inicial.month != tempo_final.month and len(escala_do_dia) > 90 :
+    numero_mes={01: "Jan", 02: "Fev", 03: "Mar", 04: "Abr", 05: "Mai", 06: "Jun", 07: "Jul", 08: "Ago", 09: "Set", 10: "Out", 11: "Nov", 12:"Dez"}
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
     filtrados['Datetime'] = pd.DatetimeIndex(filtrados['Datetime'])
     filtrados.set_index('Datetime',inplace=True)
     filtrados= filtrados.resample('M').sum()
     filtrados = filtrados.reset_index()
-    mes= pd.DatetimeIndex(filtrados['Datetime']).month
-    filtrados['Datetime']=mes.rename(lambda x: x.strftime('%b'))
-    filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
+    meses = filtrados['Datetime'].apply(lambda x: numero_mes[x])
+    filtrados['Datetime'] = meses 
     st.write(filtrados)
     st.write(filtrados.dtypes)
     return filtrados
