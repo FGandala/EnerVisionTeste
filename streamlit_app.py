@@ -27,18 +27,24 @@ def filtra_dados(região,tempo_inicial,tempo_final):
   data_frame['Datetime']=pd.to_datetime(data_frame['Datetime'])
 
   if tempo_inicial.year != tempo_final.year:
-    a=1
+    filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
+    filtrados['Datetime'] = pd.DatetimeIndex(filtrados['Datetime'])
+    filtrados.set_index('Datetime',inplace=True)
+    filtrados = filtrados.resample('Y').sum()
+    filtrados.reset_index(inplace=True)
+    ano = filtrados['Datetime'].dt.strftime("%y")
+    filtrados['Datetime']= ano
+    filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
+    return filtrado
   elif tempo_inicial.month != tempo_final.month and len(escala_do_dia) > 90 :
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
     filtrados['Datetime'] = pd.DatetimeIndex(filtrados['Datetime'])
     filtrados.set_index('Datetime',inplace=True)
     filtrados = filtrados.resample('M').sum()
-    st.write(filtrados)
     filtrados.reset_index(inplace=True)
     mes = filtrados['Datetime'].dt.strftime("%m")
     filtrados['Datetime']=mes
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
-    st.write(filtrados)
     return filtrados
   elif tempo_inicial.day != tempo_final.day : 
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
