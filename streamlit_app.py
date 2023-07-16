@@ -141,9 +141,12 @@ def home():
     
   
     st.sidebar.image('LOGO.png')
-
+    
     opção_regiao = st.sidebar.selectbox('Escolha uma região',('Norte','Nordeste','Centro-sul','Sul')) 
-    st.metric(label="Carga Ultima Hora: ", value="70 °F", delta="1.2 °F")
+    col1, col2, col3 = st.columns(3)
+    col1.metric(label="Consumo na próxima hora: ", value="70 °F", delta="1.2 °F")
+    col2.metric(label="Consumo na ultima hora: ", value="70 °F", delta="1.2 °F")
+    col3.metric(label="Consumo na pico ultimas 24 horas: ", value="70 °F", delta="1.2 °F")
     if opção_regiao == 'Centro-sul':
       cria_mapa([None,None,None,200])
     if opção_regiao == 'Nordeste':
