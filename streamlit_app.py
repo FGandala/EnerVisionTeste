@@ -148,7 +148,7 @@ def home():
                 delta = f"{(coleta_dados_csv()[opção_regiao].iloc[-1] - coleta_dados_csv()[opção_regiao].iloc[-2]).round()} MWh")
     col2.metric(label="Consumo na última hora: ",value = f"{coleta_dados_csv()[opção_regiao].iloc[-2]} MWh" ,
                 delta = f"{(coleta_dados_csv()[opção_regiao].iloc[-2] - coleta_dados_csv()[opção_regiao].iloc[-3]).round()} MWh",
-                help=f"Valor do consumo de energia ás {(pd.DatetimeIndex(coleta_dados_csv()['Datetime']).dt.strftime('%H/%M')).iloc[-1]}")
+                help=f"Valor do consumo de energia ás {coleta_dados_csv()['Datetime'].iloc[-1].strftime('%H/%M')}")
     col3.metric(label="Pico de consumo nas últimas 24 horas: ", value=f"{coleta_dados_csv()[opção_regiao].iloc[-24:-1].max()} MWh", 
                 delta=f"{(coleta_dados_csv()[opção_regiao].iloc[-48:-24].max() - coleta_dados_csv()[opção_regiao].iloc[-24:-1].max()).round()} MWh")
   
