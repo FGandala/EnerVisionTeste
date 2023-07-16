@@ -145,11 +145,11 @@ def home():
     opção_regiao = st.sidebar.selectbox('Escolha uma região',('Norte','Nordeste','Centro-sul','Sul')) 
     col1, col2, col3 = st.columns(3)
     col1.metric(label="Consumo na próxima hora: ", value = f"{coleta_dados_csv()[opção_regiao].iloc[-1]} MWh",
-                delta = f"{coleta_dados_csv()[opção_regiao].iloc[-2] - coleta_dados_csv()[opção_regiao].iloc[-1]} MWh")
+                delta = f"{(coleta_dados_csv()[opção_regiao].iloc[-2] - coleta_dados_csv()[opção_regiao].iloc[-1]).round()} MWh")
     col2.metric(label="Consumo na última hora: ",value = f"{coleta_dados_csv()[opção_regiao].iloc[-2]} MWh" ,
-                delta = f"{coleta_dados_csv()[opção_regiao].iloc[-3] - coleta_dados_csv()[opção_regiao].iloc[-2]} MWh")
+                delta = f"{(coleta_dados_csv()[opção_regiao].iloc[-3] - coleta_dados_csv()[opção_regiao].iloc[-2]).round()} MWh")
     col3.metric(label="Pico de consumo nas últimas 24 horas: ", value=f"{coleta_dados_csv()[opção_regiao].iloc[-24:-1].max()} MWh", 
-                delta=f"{coleta_dados_csv()[opção_regiao].iloc[-48:-24].max() - coleta_dados_csv()[opção_regiao].iloc[-24:-1].max()} MWh")
+                delta=f"{(coleta_dados_csv()[opção_regiao].iloc[-48:-24].max() - coleta_dados_csv()[opção_regiao].iloc[-24:-1].max()).round()} MWh")
   
     if opção_regiao == 'Centro-sul':
       cria_mapa([None,None,None,200])
