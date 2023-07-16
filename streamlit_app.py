@@ -35,7 +35,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     ano = filtrados['Datetime'].dt.strftime("%y")
     filtrados['Datetime']= ano
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
-    return filtrado
+    return filtrados
   elif tempo_inicial.month != tempo_final.month and len(escala_do_dia) > 90 :
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
     filtrados['Datetime'] = pd.DatetimeIndex(filtrados['Datetime'])
