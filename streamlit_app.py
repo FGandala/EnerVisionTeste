@@ -97,7 +97,7 @@ def cria_grafico_linhas(dados):
   ).configure_axis(labelLimit=250,labelFontSize=20,grid=True,title=None)
 
   
-  st.subheader("Demanda Prevista")
+  st.subheader("Gráfico de Demanda")
   return grafico_real
   
 
@@ -147,7 +147,8 @@ def home():
     col1.metric(label="Consumo na próxima hora: ", value = f"{coleta_dados_csv()[opção_regiao].iloc[-1]} MWh",
                 delta = f"{(coleta_dados_csv()[opção_regiao].iloc[-2] - coleta_dados_csv()[opção_regiao].iloc[-1]).round()} MWh")
     col2.metric(label="Consumo na última hora: ",value = f"{coleta_dados_csv()[opção_regiao].iloc[-2]} MWh" ,
-                delta = f"{(coleta_dados_csv()[opção_regiao].iloc[-3] - coleta_dados_csv()[opção_regiao].iloc[-2]).round()} MWh")
+                delta = f"{(coleta_dados_csv()[opção_regiao].iloc[-3] - coleta_dados_csv()[opção_regiao].iloc[-2]).round()} MWh",
+                help='Valor do consumo de energia ')
     col3.metric(label="Pico de consumo nas últimas 24 horas: ", value=f"{coleta_dados_csv()[opção_regiao].iloc[-24:-1].max()} MWh", 
                 delta=f"{(coleta_dados_csv()[opção_regiao].iloc[-48:-24].max() - coleta_dados_csv()[opção_regiao].iloc[-24:-1].max()).round()} MWh")
   
