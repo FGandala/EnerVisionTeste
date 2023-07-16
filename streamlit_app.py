@@ -33,7 +33,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados['Datetime'] = pd.DatetimeIndex(filtrados['Datetime'])
     filtrados.set_index('Datetime',inplace=True)
     filtrados.resample('M').sum()
-    filtrados.reset_index()
+    filtrados.reset_index(inplace=True)
     mes = filtrados['Datetime'].dt.month 
     filtrados['Datetime']=mes
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
@@ -44,7 +44,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados['Datetime'] = pd.DatetimeIndex(filtrados['Datetime'])
     filtrados.set_index('Datetime',inplace=True)
     filtrados= filtrados.resample('D').sum()
-    filtrados = filtrados.reset_index()
+    filtrados.reset_index(inplace=True)
     filtrados['Datetime']=filtrados['Datetime'].dt.strftime("%m/%d")
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
     return filtrados
