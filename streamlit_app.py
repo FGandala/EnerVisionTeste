@@ -32,7 +32,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados.set_index('Datetime',inplace=True)
     filtrados = filtrados.resample('Y').sum()
     filtrados.reset_index(inplace=True)
-    ano = filtrados['Datetime'].dt.strftime("%y")
+    ano = filtrados['Datetime'].dt.strftime("%Y")
     filtrados['Datetime']= ano
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
     return filtrados
