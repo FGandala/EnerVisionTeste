@@ -145,7 +145,7 @@ def home():
     opção_regiao = st.sidebar.selectbox('Escolha uma região',('Norte','Nordeste','Centro-sul','Sul')) 
     col1, col2, col3 = st.columns(3)
     col1.metric(label="Consumo na próxima hora: ", value=coleta_dados_csv()[opção_regiao].iloc[-1], delta="1.2 °F")
-    col2.metric(label="Consumo na última hora: ",values=coleta_dados_csv()[opção_regiao].iloc[-2] , delta="1.2 °F")
+    col2.metric(label="Consumo na última hora: ",value=coleta_dados_csv()[opção_regiao].iloc[-2] , delta="1.2 °F")
     col3.metric(label="Pico de consumo nas últimas 24 horas: ", value=coleta_dados_csv()[opção_regiao].iloc[-24:-1].max(), delta="1.2 °F")
   
     if opção_regiao == 'Centro-sul':
