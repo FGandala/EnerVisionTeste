@@ -32,7 +32,10 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
     filtrados['Datetime'] = pd.DatetimeIndex(filtrados['Datetime'])
     filtrados.set_index('Datetime',inplace=True)
-    filtrados.groupby(pd.Grouper(freq='M')) 
+    filtrados.resample('M').sum()
+    filtrados.reset_index()
+    mes = filtrados['Datetime'].dt.month 
+    filtrados['Datetime']=mes
     st.write(filtrados)
     return filtrados
   elif tempo_inicial.day != tempo_final.day : 
