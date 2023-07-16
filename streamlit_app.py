@@ -36,6 +36,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados.reset_index()
     mes = filtrados['Datetime'].dt.month 
     filtrados['Datetime']=mes
+    filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
     st.write(filtrados)
     return filtrados
   elif tempo_inicial.day != tempo_final.day : 
