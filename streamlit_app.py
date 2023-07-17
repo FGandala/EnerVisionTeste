@@ -158,8 +158,7 @@ def home():
 
     col4 = st.columns([1,2])
     if opção_regiao == 'Centro-sul':
-      with col4:
-        cria_mapa([None,None,None,200])
+      cria_mapa([None,None,None,200])
     if opção_regiao == 'Nordeste':
       cria_mapa([200,None,None,None])
     if opção_regiao == 'Norte':
