@@ -134,7 +134,8 @@ def cria_mapa(cores):
           folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
         )
     st.subheader("Região Selecionada")
-    st_mapa = st_folium(mapa, width=1000, height=450,key='Centro-sul') 
+    col4 = st.columns(1)
+    col4.folium(mapa, width=1000, height=450,key='Centro-sul') 
     
           
 def home():
@@ -153,7 +154,7 @@ def home():
     col3.metric(label  ="Pico de consumo nas últimas 24 horas: ", value=f"{coleta_dados_csv()[opção_regiao].iloc[-24:-1].max()} MWh", 
                 delta = f"{(coleta_dados_csv()[opção_regiao].iloc[-48:-24].max() - coleta_dados_csv()[opção_regiao].iloc[-24:-1].max()).round()} MWh",
                 help = f"Valor do consumo de energia ás {pd.to_datetime(coleta_dados_csv()['Datetime'].iloc[coleta_dados_csv()[opção_regiao].iloc[-24:-1].idxmax()]).strftime('%H:%M na data %d/%m/%y')}")
-  
+    
     if opção_regiao == 'Centro-sul':
       cria_mapa([None,None,None,200])
     if opção_regiao == 'Nordeste':
