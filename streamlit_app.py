@@ -134,10 +134,11 @@ def cria_mapa(cores):
           folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
         )
     st.subheader("Região Selecionada")
-    col4 = st.columns(5)
+    col4 = st.columns(1)
     #st_mapa=folium(mapa, width=1000, height=450,key='Centro-sul') 
     with col4:
-     st_mapa = folium(mapa, width=1000, height=450,) 
+      st.write('Olá')
+     #st_mapa = folium(mapa, width=1000, height=450,) 
           
 def home():
     
