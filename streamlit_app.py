@@ -137,7 +137,7 @@ def cria_mapa(cores):
     col4 = st.columns(1)
     #st_mapa=folium(mapa, width=1000, height=450,key='Centro-sul') 
     with col4:
-      folium(mapa, width=1000, height=450,key='Centro-sul') 
+     st_mapa = folium(mapa, width=1000, height=450,) 
           
 def home():
     
@@ -146,16 +146,16 @@ def home():
     
     opção_regiao = st.sidebar.selectbox('Escolha uma região',('Norte','Nordeste','Centro-sul','Sul')) 
   
-    #col1, col2, col3 = st.columns(3)
-    #col1.metric(label = "Consumo na próxima hora: ", value = f"{coleta_dados_csv()[opção_regiao].iloc[-1]} MWh",
-               # delta = f"{(coleta_dados_csv()[opção_regiao].iloc[-1] - coleta_dados_csv()[opção_regiao].iloc[-2]).round()} MWh",
-                #help = f"Valor do consumo de energia previsto para ás {pd.to_datetime(coleta_dados_csv()['Datetime'].iloc[-1]).strftime('%H:%M na data %d/%m/%y')}" )
-    #col2.metric(label = "Consumo na última hora: ",value = f"{coleta_dados_csv()[opção_regiao].iloc[-2]} MWh" ,
-               # delta = f"{(coleta_dados_csv()[opção_regiao].iloc[-2] - coleta_dados_csv()[opção_regiao].iloc[-3]).round()} MWh",
-               # help = f"Valor do consumo de energia ás {pd.to_datetime(coleta_dados_csv()['Datetime'].iloc[-2]).strftime('%H:%M na data %d/%m/%y')}")
-   # col3.metric(label  ="Pico de consumo nas últimas 24 horas: ", value=f"{coleta_dados_csv()[opção_regiao].iloc[-24:-1].max()} MWh", 
-                #delta = f"{(coleta_dados_csv()[opção_regiao].iloc[-48:-24].max() - coleta_dados_csv()[opção_regiao].iloc[-24:-1].max()).round()} MWh",
-               # help = f"Valor do consumo de energia ás {pd.to_datetime(coleta_dados_csv()['Datetime'].iloc[coleta_dados_csv()[opção_regiao].iloc[-24:-1].idxmax()]).strftime('%H:%M na data %d/%m/%y')}")
+    col1, col2, col3 = st.columns(3)
+    col1.metric(label = "Consumo na próxima hora: ", value = f"{coleta_dados_csv()[opção_regiao].iloc[-1]} MWh",
+               delta = f"{(coleta_dados_csv()[opção_regiao].iloc[-1] - coleta_dados_csv()[opção_regiao].iloc[-2]).round()} MWh",
+               help = f"Valor do consumo de energia previsto para ás {pd.to_datetime(coleta_dados_csv()['Datetime'].iloc[-1]).strftime('%H:%M na data %d/%m/%y')}" )
+    col2.metric(label = "Consumo na última hora: ",value = f"{coleta_dados_csv()[opção_regiao].iloc[-2]} MWh" ,
+               delta = f"{(coleta_dados_csv()[opção_regiao].iloc[-2] - coleta_dados_csv()[opção_regiao].iloc[-3]).round()} MWh",
+               help = f"Valor do consumo de energia ás {pd.to_datetime(coleta_dados_csv()['Datetime'].iloc[-2]).strftime('%H:%M na data %d/%m/%y')}")
+    col3.metric(label  ="Pico de consumo nas últimas 24 horas: ", value=f"{coleta_dados_csv()[opção_regiao].iloc[-24:-1].max()} MWh", 
+               delta = f"{(coleta_dados_csv()[opção_regiao].iloc[-48:-24].max() - coleta_dados_csv()[opção_regiao].iloc[-24:-1].max()).round()} MWh",
+               help = f"Valor do consumo de energia ás {pd.to_datetime(coleta_dados_csv()['Datetime'].iloc[coleta_dados_csv()[opção_regiao].iloc[-24:-1].idxmax()]).strftime('%H:%M na data %d/%m/%y')}")
     
     if opção_regiao == 'Centro-sul':
       cria_mapa([None,None,None,200])
