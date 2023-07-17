@@ -145,7 +145,7 @@ def home():
     st.sidebar.image('LOGO.png')
     
     opção_regiao = st.sidebar.selectbox('Escolha uma região',('Norte','Nordeste','Centro-sul','Sul')) 
-    col1, col2, col3 = st.columns(3)
+    #col1, col2, col3 = st.columns(3)
     col1.metric(label = "Consumo na próxima hora: ", value = f"{coleta_dados_csv()[opção_regiao].iloc[-1]} MWh",
                 delta = f"{(coleta_dados_csv()[opção_regiao].iloc[-1] - coleta_dados_csv()[opção_regiao].iloc[-2]).round()} MWh",
                 help = f"Valor do consumo de energia previsto para ás {pd.to_datetime(coleta_dados_csv()['Datetime'].iloc[-1]).strftime('%H:%M na data %d/%m/%y')}" )
