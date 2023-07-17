@@ -137,8 +137,7 @@ def cria_mapa(cores):
     col4 = st.columns(1)
     #st_mapa=folium(mapa, width=1000, height=450,key='Centro-sul') 
     with col4:
-      folium_static(mapa)
-    
+      folium(mapa, width=1000, height=450,key='Centro-sul') 
           
 def home():
     
