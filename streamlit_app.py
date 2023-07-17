@@ -136,7 +136,8 @@ def cria_mapa(cores):
     st.subheader("Região Selecionada")
     col4 = st.columns(1)
     #st_mapa=folium(mapa, width=1000, height=450,key='Centro-sul') 
-    col4.folium_static(mapa)
+    with c4:
+      folium_static(mapa)
     
           
 def home():
