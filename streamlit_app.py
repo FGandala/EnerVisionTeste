@@ -134,12 +134,8 @@ def cria_mapa(cores):
           folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
         )
     st.subheader("Região Selecionada")
-    col4 = st.columns(1)
-    #st_mapa=folium(mapa, width=1000, height=450,key='Centro-sul') 
-    with col4:
-      st.write('Olá')
-     #st_mapa = folium(mapa, width=1000, height=450,) 
-          
+    st_mapa=folium(mapa, width=1000, height=450) 
+   
 def home():
     
   
@@ -148,6 +144,7 @@ def home():
     opção_regiao = st.sidebar.selectbox('Escolha uma região',('Norte','Nordeste','Centro-sul','Sul')) 
   
     col1, col2, col3 = st.columns(3)
+    
     col1.metric(label = "Consumo na próxima hora: ", value = f"{coleta_dados_csv()[opção_regiao].iloc[-1]} MWh",
                delta = f"{(coleta_dados_csv()[opção_regiao].iloc[-1] - coleta_dados_csv()[opção_regiao].iloc[-2]).round()} MWh",
                help = f"Valor do consumo de energia previsto para ás {pd.to_datetime(coleta_dados_csv()['Datetime'].iloc[-1]).strftime('%H:%M na data %d/%m/%y')}" )
@@ -157,9 +154,12 @@ def home():
     col3.metric(label  ="Pico de consumo nas últimas 24 horas: ", value=f"{coleta_dados_csv()[opção_regiao].iloc[-24:-1].max()} MWh", 
                delta = f"{(coleta_dados_csv()[opção_regiao].iloc[-48:-24].max() - coleta_dados_csv()[opção_regiao].iloc[-24:-1].max()).round()} MWh",
                help = f"Valor do consumo de energia ás {pd.to_datetime(coleta_dados_csv()['Datetime'].iloc[coleta_dados_csv()[opção_regiao].iloc[-24:-1].idxmax()]).strftime('%H:%M na data %d/%m/%y')}")
-    
+
+
+    col4 = st.columns([1,2])
     if opção_regiao == 'Centro-sul':
-      cria_mapa([None,None,None,200])
+      with col4:
+        cria_mapa([None,None,None,200])
     if opção_regiao == 'Nordeste':
       cria_mapa([200,None,None,None])
     if opção_regiao == 'Norte':
