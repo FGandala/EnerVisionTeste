@@ -135,7 +135,7 @@ def cria_mapa(cores):
           folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
         )
     st.subheader("Região Selecionada")
-    st_mapa=st_folium(mapa,use_container_width=True, height=450) 
+    st_mapa=folium_static(mapa,use_container_width=True, height=450) 
    
 def home():
     
