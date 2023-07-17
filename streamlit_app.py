@@ -6,7 +6,7 @@ from streamlit_folium import folium_static
 import datetime
 import geopandas as gpd
 import altair as alt
-import streamlit_javascipt as st_js
+import streamlit_javascript as st_js
 
 st.set_page_config(page_title='Forecasting',layout='wide')
 
