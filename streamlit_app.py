@@ -152,7 +152,7 @@ def home():
                 help = f"Valor do consumo de energia ás {pd.to_datetime(coleta_dados_csv()['Datetime']).iloc[-2].strftime('%H:%M na data %d/%m/%y')}")
     col3.metric(label  ="Pico de consumo nas últimas 24 horas: ", value=f"{coleta_dados_csv()[opção_regiao].iloc[-24:-1].max()} MWh", 
                 delta = f"{(coleta_dados_csv()[opção_regiao].iloc[-48:-24].max() - coleta_dados_csv()[opção_regiao].iloc[-24:-1].max()).round()} MWh",
-                help = f"Valor do consumo de energia ás {pd.to_datetime(coleta_dados_csv()['Datetime']).iloc[-2].strftime('%H:%M na data %d/%m/%y')}")
+                help = f"Valor do consumo de energia ás {pd.to_datetime(coleta_dados_csv()['Datetime']).iloc[coleta_dados_csv().opção_regiao.get_loc(coleta_dados_csv()[opção_regiao].iloc[-24:-1].max()].strftime('%H:%M na data %d/%m/%y')}")
   
     if opção_regiao == 'Centro-sul':
       cria_mapa([None,None,None,200])
