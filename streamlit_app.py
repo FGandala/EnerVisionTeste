@@ -140,7 +140,7 @@ def cria_mapa(cores):
     if tamanho_da_tela > 500:
       st_mapa=st_folium(mapa,width=1000, height=450) 
     if tamanho_da_tela < 500:
-      st_mapa=st_folium(mapa,width=200, height=450) 
+      st_mapa=st_folium(mapa,width=100, height=450) 
 def home():
     
   
