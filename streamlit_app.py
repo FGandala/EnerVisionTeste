@@ -9,6 +9,7 @@ import altair as alt
 import streamlit_javascript as st_js
 
 st.set_page_config(page_title='Forecasting',layout='wide')
+tamanho_da_tela = st_js.st_javascript("window.innerWidth")
 
 pagina = st.empty()
 @st.cache_data
@@ -136,8 +137,10 @@ def cria_mapa(cores):
           folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
         )
     st.subheader("Região Selecionada")
-    st_mapa=folium_static(mapa) 
-   
+    if tamanho_da_tela > 500:
+      st_mapa=st_folium(mapa,width=1000, height=450) 
+    if tamanho_da_tel < 500:
+      st_mapa=st_folium(mapa,width=200, height=450) 
 def home():
     
   
@@ -182,8 +185,8 @@ def home():
     
     
     st.altair_chart(cria_grafico_linhas(filtra_dados(opção_regiao,opção_tempo_inicial,opção_tempo_final)), theme="streamlit", use_container_width=True)
-    teste = st_js.st_javascript("window.innerWidth")
-    st.write(teste)
+    
+    st.write(tamanho_da_tela)
 
 
 
