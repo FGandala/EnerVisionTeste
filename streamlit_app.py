@@ -145,10 +145,9 @@ def cria_mapa(cores):
           folium.features.GeoJsonTooltip(['NOME2','MHW'],labels=False)
         )
     st.subheader("Região Selecionada")
-    if tamanho_da_tela > 500:
-      st_mapa=st_folium(mapa,width=1000, height=450) 
-    if tamanho_da_tela < 500:
-      st_mapa=st_folium(mapa,width=150, height=450) 
+    st_mapa=st_folium(mapa,width=1000, height=450) 
+   
+       
 def home():
     
   
