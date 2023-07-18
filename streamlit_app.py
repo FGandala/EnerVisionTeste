@@ -92,20 +92,12 @@ def cria_grafico_linhas(dados):
   pontos_proximos
   )
   
-  if tamanho_da_tela > 500:
-    grafico_real = alt.layer(
+  grafico_real = alt.layer(
       seletores, pontos, texto, regua, grafico
       ).properties(
       width=1000, height=450
       ).configure_axis(labelLimit=250,labelFontSize=20,grid=True,title=None)
     
-  if tamanho_da_tela < 500:
-      grafico_real = alt.layer(
-      seletores, pontos, texto, regua, grafico
-      ).properties(
-      width=300, height=450
-      ).configure_axis(labelLimit=250,labelFontSize=20,grid=True,title=None)
-
     
   
   st.subheader("Gráfico de Demanda")
