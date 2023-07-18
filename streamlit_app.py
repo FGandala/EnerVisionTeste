@@ -6,10 +6,8 @@ from streamlit_folium import folium_static
 import datetime
 import geopandas as gpd
 import altair as alt
-import streamlit_javascript as st_js
 
 st.set_page_config(page_title='Forecasting',layout='wide')
-tamanho_da_tela = st_js.st_javascript("window.innerWidth")
 
 pagina = st.empty()
 @st.cache_data
@@ -65,7 +63,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados['Datetime']= filtrados['Datetime'].copy().dt.strftime("%H:%M")
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
     return filtrados
-def cria_grafico_linhas(dados):
+def cria_grafico_consumo(dados):
   grafico=alt.Chart(dados).mark_area(color = 'orange',
                            opacity = 0.5, line = {'color':'orange'}).encode(
     alt.X('Tempo',axis=alt.Axis(labelAngle=0)),
@@ -183,9 +181,8 @@ def home():
 
     
     
-    st.altair_chart(cria_grafico_linhas(filtra_dados(opção_regiao,opção_tempo_inicial,opção_tempo_final)), theme="streamlit", use_container_width=True)
+    st.altair_chart(cria_grafico_consumo(filtra_dados(opção_regiao,opção_tempo_inicial,opção_tempo_final)), theme="streamlit", use_container_width=True)
     
-    st.write(tamanho_da_tela)
 
 
 
