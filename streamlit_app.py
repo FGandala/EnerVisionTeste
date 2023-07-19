@@ -20,6 +20,7 @@ def coleta_dados_csv():
 def coleta_localizacao():
   localizacao = gpd.read_file('grandes_regioes_json.geojson')
   return localizacao
+  
 def filtra_dados(região,tempo_inicial,tempo_final):
   escala_do_dia = pd.date_range(start=tempo_inicial, end=tempo_final)
   tempo_inicial=datetime.datetime(tempo_inicial.year,tempo_inicial.month,tempo_inicial.day,0,0,0)
@@ -37,6 +38,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados['Datetime']= ano
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
     return filtrados
+    
   elif tempo_inicial.month != tempo_final.month and len(escala_do_dia) > 90 :
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
     filtrados['Datetime'] = pd.DatetimeIndex(filtrados['Datetime'])
@@ -47,6 +49,7 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados['Datetime']=mes
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
     return filtrados
+    
   elif tempo_inicial.day != tempo_final.day : 
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
     filtrados['Datetime'] = pd.DatetimeIndex(filtrados['Datetime'])
@@ -57,12 +60,12 @@ def filtra_dados(região,tempo_inicial,tempo_final):
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
     return filtrados
   
-  
   else:
     filtrados=data_frame.loc[(data_frame['Datetime']>=tempo_inicial)&(data_frame['Datetime']<=tempo_final)]
     filtrados['Datetime']= filtrados['Datetime'].copy().dt.strftime("%H:%M")
     filtrados.rename(columns={região:'Mhw','Datetime':'Tempo'},inplace=True)
     return filtrados
+    
 def cria_grafico_consumo(dados):
   grafico=alt.Chart(dados).mark_area(color = 'orange',
                            opacity = 0.5, line = {'color':'orange'}).encode(
@@ -100,8 +103,16 @@ def cria_grafico_consumo(dados):
   
   st.subheader("Gráfico de Demanda")
   return grafico_real
-  
 
+
+def filtra_dados_comparação(região):
+ dados = coleta_dados_csv()[[região,'Datetime']]
+ tempo = pd.DatetimeIndex(dados['Datetime'].iloc[-24:]).strftime("%H:%M")
+ dados_grafico = [dados[região].iloc[-24:].values,dados[região].iloc[-48:-24].values]
+ dic = {'real':dados_grafico[0],'previsto':dados_grafico[1]}
+ return pd.DataFrame(index=tempo, data=dic)
+
+  
 @st.cache_data(experimental_allow_widgets=True)
 def cria_mapa(cores):
 
@@ -167,6 +178,7 @@ def home():
     if opção_regiao == 'Sul':
       cria_mapa([None,None,200,None])
     dados_tempo=coleta_dados_csv()
+  
     inicio=pd.to_datetime(dados_tempo['Datetime']).iloc[0]
     fim=pd.to_datetime(dados_tempo['Datetime']).iloc[len(dados_tempo['Datetime'])-1]
     opção_tempo_inicial = st.sidebar.date_input('Escolha uma data inicial',fim,min_value=inicio,
